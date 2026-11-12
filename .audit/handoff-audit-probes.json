@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-11",
+  "method": "Root executed TypeScript domain probes with isolated :memory: SQLite. No app demo data changed. Optional safety provider was a mock, not live inference.",
+  "seed": {
+    "rivertonTotal": 30,
+    "members": 25,
+    "organizations": 4,
+    "coordinators": 1,
+    "offerOwners": 15,
+    "requests": 23,
+    "offers": 15,
+    "resources": 5,
+    "commitmentStates": [
+      "confirmed",
+      "confirmed",
+      "delivered",
+      "in_progress"
+    ],
+    "activeEmergency": null
+  },
+  "timingAndUrgency": {
+    "text": "I need groceries near Central Park tomorrow.",
+    "previewTiming": "tomorrow",
+    "previewUrgency": "Time sensitive",
+    "savedUrgency": "Routine",
+    "savedWindowStart": "2026-11-10T18:00:00.000Z",
+    "demoNow": "2026-11-10T18:00:00.000Z"
+  },
+  "flood": {
+    "text": "We are near River Street. There are three of us, and one person cannot walk. We need transportation to a safe shelter.",
+    "categories": [
+      "Transport",
+      "Shelter"
+    ],
+    "area": "River Street",
+    "timing": null,
+    "peopleAffected": null,
+    "urgency": "Critical review",
+    "safetyFlags": [
+      "danger"
+    ]
+  },
+  "providerSafety": {
+    "text": "Need groceries in Central Park today",
+    "mockProviderSafetyFlags": [
+      "provider_sensitive"
+    ],
+    "previewFlags": [
+      "provider_sensitive"
+    ],
+    "previewUrgency": "Critical review",
+    "savedRestricted": false,
+    "savedFlags": [],
+    "savedUrgency": "Routine",
+    "visibleToUnrelatedMember": true,
+    "rawIntakePublic": false
+  }
+}

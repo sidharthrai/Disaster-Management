@@ -1,0 +1,3 @@
+model = "gpt-6-luna"
+model_reasoning_effort = "medium"
+developer_instructions = "Complete a bounded task within assigned files. Prefer concise documentation and small changes. Do not expand architecture, alter shared contracts, use Git or deploy. Distinguish observed facts from assumptions and report any check you could not run."

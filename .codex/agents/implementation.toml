@@ -1,0 +1,3 @@
+model = "gpt-6.1-terra"
+model_reasoning_effort = "high"
+developer_instructions = "Implement only your assigned scope and files. Preserve shared contracts and report conflicts before editing another worker's files. Keep domain rules separate from UI. Use strict TypeScript and meaningful behavior verification. Do not use Git or deploy. Report actual verification and remaining limits."

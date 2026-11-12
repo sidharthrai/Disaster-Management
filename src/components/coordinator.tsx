@@ -1,0 +1,42 @@
+'use client';
+
+import Link from 'next/link';
+import { useState, type FormEvent } from 'react';
+import { areas, categories } from '@/domain/model';
+import { useNetwork } from './network-context';
+import { Badge, Button, Empty, PageHeading, dateLabel } from './ui';
+
+const presets = ['All', 'Unassigned', 'Awaiting response', 'In progress', 'Overdue', 'Awaiting confirmation', 'Escalated'] as const;
+
+export function Coordinator() {
+  const { state, command, busy } = useNetwork();
+  const [preset, setPreset] = useState<(typeof presets)[number]>('All');
+  const [search, setSearch] = useState('');
+  const [status, setStatus] = useState('');
+  const [category, setCategory] = useState('');
+  const [urgency, setUrgency] = useState('');
+  const [area, setArea] = useState('');
+  const [assignee, setAssignee] = useState('');
+  const [flag, setFlag] = useState('');
+  const [thresholds, setThresholds] = useState(state.settings.followUp);
+  const [event, setEvent] = useState<'Flood' | 'Wildfire' | 'Storm' | 'Earthquake'>('Flood');
+  if (state.actor.role !== 'coordinator') return <><PageHeading eyebrow="COORDINATOR" title="Coordinator access" description="This workspace is available to coordinators."/><div className="notice-box">A coordinator account is required to review the queue.</div></>;
+  const coordinators = state.users.filter(u => u.role === 'coordinator' && u.communityId === state.actor.communityId);
+  const requests = state.requests.filter(r => {
+    const connections = state.commitments.filter(c => c.requestId === r.id);
+    const overdue = r.flags.length > 0;
+    const presetMatch = preset === 'All' || (preset === 'Unassigned' && !r.assignedCoordinatorId && !r.closure && r.status !== 'Resolved') || (preset === 'Awaiting response' && connections.some(c => c.status === 'proposed')) || (preset === 'In progress' && r.status === 'In progress') || (preset === 'Overdue' && overdue) || (preset === 'Awaiting confirmation' && r.status === 'Awaiting confirmation') || (preset === 'Escalated' && r.flags.some(f => f.kind.includes('escalat')));
+    return presetMatch && (!search || `${r.title} ${r.summary} ${r.id}`.toLowerCase().includes(search.toLowerCase())) && (!status || r.status === status) && (!category || r.needs.some(n => n.category === category)) && (!urgency || r.urgency === urgency) && (!area || r.area === area) && (!assignee || (assignee === 'unassigned' ? !r.assignedCoordinatorId : r.assignedCoordinatorId === assignee)) && (!flag || (flag === 'any' ? overdue : r.flags.some(f => f.kind === flag)));
+  });
+  const flagKinds = Array.from(new Set(state.requests.flatMap(r => r.flags.map(f => f.kind))));
+  async function saveThresholds(e: FormEvent) { e.preventDefault(); try { await command({ type: 'followUpSettings', input: thresholds }, 'Follow-up thresholds saved.'); } catch {} }
+  return <><PageHeading eyebrow="COORDINATOR WORKSPACE" title="Care for the whole network." description="Review the queue, coordinate follow-up, and document decisions." action={<Link href="/emergency" className="button-secondary">Emergency dashboard</Link>}/>
+    <div className="metrics-strip"><div><strong>{state.metrics.open}</strong><span>Open requests</span></div><div><strong>{state.metrics.needsAttention}</strong><span>Need attention</span></div><div><strong>{state.reports.filter(r => !r.resolved).length}</strong><span>Reports to review</span></div></div>
+    <section className="block-section"><div className="section-heading"><div><h2>Request queue</h2><p>Combine filters to narrow the queue. Flags call for follow-up; they do not confirm an outcome.</p></div><strong>{requests.length} shown</strong></div>
+      <div className="button-row queue-presets" aria-label="Queue presets">{presets.map(p => <button className={preset === p ? 'button-primary' : 'button-secondary'} aria-pressed={preset === p} onClick={() => setPreset(p)} key={p}>{p}</button>)}</div>
+      <div className="filter-grid"><label className="field">Search<input value={search} onChange={e => setSearch(e.target.value)} placeholder="Title, summary, or case ID"/></label><label className="field">Status<select value={status} onChange={e => setStatus(e.target.value)}><option value="">All statuses</option>{['Open', 'Connected', 'In progress', 'Awaiting confirmation', 'Resolved', 'Closed'].map(x => <option key={x}>{x}</option>)}</select></label><label className="field">Category<select value={category} onChange={e => setCategory(e.target.value)}><option value="">All categories</option>{categories.map(x => <option key={x}>{x}</option>)}</select></label><label className="field">Urgency<select value={urgency} onChange={e => setUrgency(e.target.value)}><option value="">All urgency</option>{['Routine', 'Time sensitive', 'Urgent', 'Critical review'].map(x => <option key={x}>{x}</option>)}</select></label><label className="field">Area<select value={area} onChange={e => setArea(e.target.value)}><option value="">All areas</option>{areas.map(x => <option key={x}>{x}</option>)}</select></label><label className="field">Coordinator<select value={assignee} onChange={e => setAssignee(e.target.value)}><option value="">All coordinators</option><option value="unassigned">Unassigned</option>{coordinators.map(u => <option value={u.id} key={u.id}>{u.name}</option>)}</select></label><label className="field">Follow-up flag<select value={flag} onChange={e => setFlag(e.target.value)}><option value="">All cases</option><option value="any">Any active flag</option>{flagKinds.map(x => <option key={x} value={x}>{x.replaceAll('_', ' ')}</option>)}</select></label></div>
+      <div className="list">{requests.map(r => <article className="list-row" key={r.id}><div><h3>{r.title} <Badge tone={r.restricted ? 'warning' : 'neutral'}>{r.restricted ? 'Private' : r.status}</Badge></h3><p>{r.area} · {r.urgency} · {coordinators.find(u => u.id === r.assignedCoordinatorId)?.name ?? 'Unassigned'}</p><p>{r.flags.map(f => f.description).join(' · ') || 'No active follow-up flags'} · Created {dateLabel(r.createdAt)}</p></div><Link className="text-link" href={`/requests/${r.id}`}>Review case →</Link></article>)}</div>{!requests.length && <Empty title="No requests in this view">Adjust the filters to see more cases.</Empty>}</section>
+    <section className="block-section"><h2>Follow-up thresholds</h2><p>Hours before a condition is flagged. Changing a threshold never confirms help.</p><form onSubmit={saveThresholds} className="filter-grid">{Object.entries(thresholds).map(([key, value]) => <label className="field" key={key}>{({unassignedHours:'Unassigned', responseHours:'Awaiting response', confirmationHours:'Awaiting confirmation', acceptedIdleHours:'Accepted but idle', urgentReviewHours:'Urgent review'} as Record<string,string>)[key]}<input type="number" min="1" max="720" required value={value} onChange={e => setThresholds({ ...thresholds, [key]: Number(e.target.value) })}/></label>)}<Button disabled={busy}>Save thresholds</Button></form></section>
+    <section className="block-section"><h2>Simulated incident</h2><p>Existing offers and resources must reconfirm readiness. This does not dispatch help.</p><div className="button-row"><select aria-label="Incident type" value={event} onChange={e => { const value = e.target.value; if (value === 'Flood' || value === 'Wildfire' || value === 'Storm' || value === 'Earthquake') setEvent(value); }}><option>Flood</option><option>Wildfire</option><option>Storm</option><option>Earthquake</option></select><Button disabled={busy} onClick={() => void command({ type: 'emergency', event }).catch(() => {})}>Activate simulation</Button>{state.settings.emergency && <Button secondary disabled={busy} onClick={() => void command({ type: 'emergency', event: null }).catch(() => {})}>Return to everyday mode</Button>}</div></section>
+    <section className="block-section"><h2>Community reports</h2>{state.reports.filter(r => !r.resolved).map(r => <article className="list-row" key={r.id}><div><Link className="text-link" href={`/requests/${r.requestId}`}>View reported request →</Link><p>{r.reason}</p></div><div className="button-row"><Button secondary disabled={busy} onClick={() => void command({ type: 'moderate', id: r.id, hide: false }).catch(() => {})}>Mark reviewed</Button><Button secondary disabled={busy} onClick={() => void command({ type: 'moderate', id: r.id, hide: true }).catch(() => {})}>Restrict for review</Button></div></article>)}{!state.reports.some(r => !r.resolved) && <p>No reports awaiting review.</p>}</section></>;
+}

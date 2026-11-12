@@ -1,0 +1,4 @@
+phase	decision	evidence	status
+frame	User authorized full actual application after HTML prototype review	Current user request	active
+frame	No Git operations. File metadata and work records stay truthful.	User no-Git constraint and assistant integrity boundary	active
+frame	Done requires runnable no-key app, persisted multi-need lifecycle, matching, private coordination, coordinator follow-up, incident readiness, tests and build.	docs/product-scope.md and handoff documents	active
