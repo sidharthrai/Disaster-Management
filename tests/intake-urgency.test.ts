@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { reviewedInitialUrgency } from '../src/lib/intake-urgency';
+import { applyReviewedUrgency, reviewedInitialUrgency } from '../src/lib/intake-urgency';
 
 describe('urgent-help intake entry', () => {
   it('prefills urgency only for the supported canonical urgent entry', () => {
@@ -9,5 +9,10 @@ describe('urgent-help intake entry', () => {
   it('preserves critical review for sensitive or already critical analysis', () => {
     expect(reviewedInitialUrgency({ urgency: 'Routine', safetyFlags: ['medical'] }, 'Urgent')).toBe('Critical review');
     expect(reviewedInitialUrgency({ urgency: 'Critical review', safetyFlags: [] }, 'Urgent')).toBe('Critical review');
+  });
+  it('keeps the safety floor after the user reviews urgency', () => {
+    expect(applyReviewedUrgency({ urgency: 'Routine', safetyFlags: [] }, 'Time sensitive')).toBe('Time sensitive');
+    expect(applyReviewedUrgency({ urgency: 'Routine', safetyFlags: [] }, 'Routine')).toBe('Routine');
+    expect(applyReviewedUrgency({ urgency: 'Routine', safetyFlags: ['medical'] }, 'Urgent')).toBe('Critical review');
   });
 });

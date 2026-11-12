@@ -8,6 +8,8 @@ import { errorsSpanish } from './locales/errors';
 export type Locale = 'en' | 'es';
 
 const spanish: Readonly<Record<string, string>> = {
+  "Request urgent help": "Solicitar ayuda urgente",
+  "Tell us what is needed. You will review the details and timing before sharing.": "Cuéntanos qué se necesita. Revisarás los detalles y el horario antes de compartir.",
   ...mapSpanish,
   ...everydaySpanish,
   ...accountWorkflowsSpanish,

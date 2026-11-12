@@ -10,3 +10,15 @@
 @media(max-width:900px){.intro{flex-direction:column;gap:8px}.incident{grid-template-columns:minmax(0,1fr) minmax(230px,.8fr)}.incidentMain{padding:25px}.incidentAside{padding:24px}.action{padding:19px 16px;gap:12px;grid-template-columns:40px minmax(0,1fr) 17px}.actionIcon{height:40px;width:40px}.action strong{font-size:14px}.readiness{align-items:start;flex-wrap:wrap}.readiness a{margin-left:33px}.requestNext{font-size:0}.requestNext svg{width:19px;height:19px}}
 @media(max-width:650px){.hub{padding-top:25px}.intro h1{font-size:28px}.intro p{font-size:13px}.incident{grid-template-columns:1fr}.incidentMain{padding:25px 22px}.incidentAside{padding:20px 22px}.incidentFacts{gap:13px}.actionGrid{grid-template-columns:1fr;gap:10px;margin-top:17px}.action{padding:18px}.action strong{font-size:15px}.sectionHeading{align-items:start;flex-direction:column;gap:12px}.sectionHeading h2,.moreTools h2{font-size:23px}.queueTools{align-items:start;flex-direction:column;gap:10px}.toolLinks{grid-template-columns:1fr}.requestRow{gap:10px}.requestCopy strong{font-size:13px}.role{font-size:10px}.readiness div{min-width:180px}}
 @media(prefers-reduced-motion:reduce){.action,.requestRow{transition:none}.action:hover,.action:active,.filters button:active,.secondaryButton:active{transform:none}}
+.actionButton{width:100%;text-align:left;font:inherit;cursor:pointer}
+.urgentPanel{margin:0 0 24px;padding:22px;background:#f8f0e4;border:1px solid #d9c3a6;border-radius:14px;color:#49382e}
+.urgentPanelHead{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.urgentPanelHead h2{font-size:22px;margin-top:6px}
+.urgentReceipt{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:18px;background:#fffdf7;border:1px solid #e1d3c0;border-radius:10px}
+.urgentReceipt p{flex:1;font-size:13px}
+.urgentReceipt>svg{color:#557b50}
+.hub .urgentPanel :global(.content-with-aside){display:block}
+.hub .urgentPanel :global(.surface){background:#fffdf7}
+@media(max-width:650px){.urgentPanel{padding:16px}}
+.newRequestRow{background:#f8edcf!important;border:1px solid #d3ab66;border-radius:9px;padding-left:10px;padding-right:10px}
+.newRequestBadge{display:inline-block!important;margin-left:8px;padding:2px 6px;border-radius:99px;background:#e7c77e;color:#5f4728!important;font-size:9px!important;letter-spacing:.05em;text-transform:uppercase}

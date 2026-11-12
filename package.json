@@ -20,7 +20,9 @@
     "check:recovery": "node scripts/recovery-check.mjs",
     "check:local-workflows": "node scripts/local-workflows-check.mjs",
     "check:remaining": "node scripts/remaining-features-check.mjs",
-    "check:live-ai": "tsx scripts/live-ai-check.mjs"
+    "check:live-ai": "tsx scripts/live-ai-check.mjs",
+    "demo:build": "node scripts/build-demo.mjs",
+    "demo:start": "node scripts/start-demo.mjs"
   },
   "dependencies": {
     "@fontsource/geist": "^5.2.0",

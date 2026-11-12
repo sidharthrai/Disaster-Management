@@ -22,3 +22,5 @@ data/
 .DS_Store
 .sites-runtime/
 .openai/*credential*
+
+brag-output*/.hyperframes-config/

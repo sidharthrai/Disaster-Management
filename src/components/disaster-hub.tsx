@@ -11,6 +11,7 @@ import { useLocale } from './locale-context';
 import { dateLabel } from './ui';
 import { DisasterPeople } from './disaster-people';
 import { DisasterSupport } from './disaster-support';
+import { IntakeForm } from './intake-form';
 import styles from './disaster-hub.module.css';
 
 function IncidentControls() {
@@ -42,7 +43,7 @@ function IncidentControls() {
   </details>;
 }
 
-function ResponseQueue() {
+function ResponseQueue({ highlightedId = '' }: { highlightedId?: string }) {
   const { state } = useNetwork();
   const { t, locale } = useLocale();
   const [scope, setScope] = useState<'network' | 'mine' | 'incident'>('network');
@@ -51,20 +52,23 @@ function ResponseQueue() {
   const active = state.requests.filter(request => !request.closure && request.status !== 'Resolved');
   const related = new Set(state.commitments.filter(connection => connection.helperId === state.actor.id && !['cancelled', 'rejected', 'confirmed'].includes(connection.status)).map(connection => connection.requestId));
   const requests = orderCommunityRequests(active.filter(request => effectiveScope === 'mine' ? request.requesterId === state.actor.id || related.has(request.id) : effectiveScope === 'incident' ? Boolean(incident && request.incidentId === incident.id) : true), true, state.settings.now);
+  const visibleRequests = highlightedId && effectiveScope !== 'network' && requests.some(request => request.id === highlightedId) ? requests : highlightedId ? [...requests.filter(request => request.id === highlightedId), ...requests.filter(request => request.id !== highlightedId)] : requests;
   const queueHref = state.actor.role === 'coordinator' ? '/coordinator' : '/dashboard';
   return <section id="response-queue" className={styles.queue} aria-labelledby="response-queue-heading">
     <div className={styles.sectionHeading}><div><span className={styles.kicker}>{t('Needs & tasks')}</span><h2 id="response-queue-heading">{t('Move the next request forward.')}</h2></div><Link className={styles.smallLink} href={queueHref}>{t(state.actor.role === 'coordinator' ? 'Open coordinator queue' : 'Open community requests')} <ArrowUpRight size={16} aria-hidden="true" /></Link></div>
     <div className={styles.queueTools}><div className={styles.filters} aria-label={t('Request scope')}>{(['network', 'mine', 'incident'] as const).map(value => <button type="button" key={value} aria-pressed={effectiveScope === value} disabled={value === 'incident' && !incident} onClick={() => setScope(value)}>{t(value === 'network' ? 'Community' : value === 'mine' ? 'My tasks' : 'This incident')}</button>)}</div><span>{requests.length} {t('open requests')}</span></div>
     <p className={styles.queueNote}>{t('Ordered by urgency, overdue window, then age. Only requests you are allowed to see appear here.')}</p>
-    {requests.length ? <div className={styles.requestList}>{requests.slice(0, 5).map(request => <Link key={request.id} href={`/requests/${encodeURIComponent(request.id)}`} className={styles.requestRow}>
+    {visibleRequests.length ? <div className={styles.requestList}>{visibleRequests.slice(0, 5).map(request => <Link key={request.id} href={`/requests/${encodeURIComponent(request.id)}`} className={`${styles.requestRow} ${request.id === highlightedId ? styles.newRequestRow : ''}`}>
       <span className={styles.requestMark}>{request.restricted ? <LockSimple size={19} aria-hidden="true" /> : <HandHeart size={19} aria-hidden="true" />}</span>
-      <span className={styles.requestCopy}><strong>{localizedRequestTitle(request, t)}</strong><span>{request.area} · {t(request.urgency)} · {t(request.status)}</span><small>{t('Window ends')} {dateLabel(request.windowEnd, locale)}{request.restricted ? ` · ${t('Private review')}` : ''}</small></span>
+      <span className={styles.requestCopy}><strong>{localizedRequestTitle(request, t)}{request.id === highlightedId && <span className={styles.newRequestBadge}>{t('New')}</span>}</strong><span>{request.area} · {t(request.urgency)} · {t(request.status)}</span><small>{t('Window ends')} {dateLabel(request.windowEnd, locale)}{request.restricted ? ` · ${t('Private review')}` : ''}</small></span>
       <span className={styles.requestNext}>{t(request.requesterId === state.actor.id && request.status === 'Awaiting confirmation' ? 'Confirm received help' : state.actor.role === 'coordinator' ? 'Review request' : 'View next step')} <ArrowRight size={16} aria-hidden="true" /></span>
     </Link>)}</div> : <div className={styles.empty}><CheckCircle size={25} aria-hidden="true" /><div><strong>{t('No open requests in this view')}</strong><p>{t(effectiveScope === 'incident' ? 'New requests created during the active incident will appear here.' : effectiveScope === 'mine' ? 'Your requests and active helper connections will appear here.' : 'Create a request when support is needed.')}</p><Link className={styles.smallLink} href="/request">{t('Ask for help')} <ArrowRight size={14} aria-hidden="true" /></Link></div></div>}
   </section>;
 }
 
 export function DisasterHub() {
+  const [urgentOpen, setUrgentOpen] = useState(false);
+  const [createdRequestId, setCreatedRequestId] = useState('');
   const { state } = useNetwork();
   const { t, locale } = useLocale();
   const incident = state.settings.emergency;
@@ -80,14 +84,15 @@ export function DisasterHub() {
     </section>
     <nav className={styles.actionGrid} aria-label={t('Disaster response actions')}>
       <a href="#people" className={`${styles.action} ${styles.peopleAction}`}><span className={styles.actionIcon}><UsersThree size={25} weight="duotone" aria-hidden="true" /></span><span><span className={styles.kicker}>{t('Find & check in')}</span><strong>{t('Missing people & safe check-ins')}</strong><small>{t('Report privately, share a check-in, or send information to help.')}</small></span><ArrowRight size={21} aria-hidden="true" /></a>
-      <Link href="/request?urgency=Urgent" className={styles.action}><span className={styles.actionIcon}><Siren size={25} weight="duotone" aria-hidden="true" /></span><span><span className={styles.kicker}>{t('Ask for support')}</span><strong>{t('Request urgent help')}</strong><small>{t('Describe the need, review details, and choose a time window.')}</small></span><ArrowRight size={21} aria-hidden="true" /></Link>
+      <button type="button" onClick={() => { setUrgentOpen(true); setCreatedRequestId(''); }} className={`${styles.action} ${styles.actionButton}`} aria-expanded={urgentOpen}><span className={styles.actionIcon}><Siren size={25} weight="duotone" aria-hidden="true" /></span><span><span className={styles.kicker}>{t('Ask for support')}</span><strong>{t('Request urgent help')}</strong><small>{t('Describe the need, review details, and choose a time window.')}</small></span><ArrowRight size={21} aria-hidden="true" /></button>
       <a href="#support" className={styles.action}><span className={styles.actionIcon}><Buildings size={25} weight="duotone" aria-hidden="true" /></span><span><span className={styles.kicker}>{t('Shelter & transport')}</span><strong>{t('Find available support')}</strong><small>{t('Check capacity and readiness, then request suitable help.')}</small></span><ArrowRight size={21} aria-hidden="true" /></a>
       <a href="#response-queue" className={styles.action}><span className={styles.actionIcon}><ListChecks size={25} weight="duotone" aria-hidden="true" /></span><span><span className={styles.kicker}>{t('Needs & tasks')}</span><strong>{t('View the response queue')}</strong><small>{t('Follow open needs, active connections, and confirmations.')}</small></span><ArrowRight size={21} aria-hidden="true" /></a>
     </nav>
+    {urgentOpen && <section className={styles.urgentPanel} aria-labelledby="urgent-intake-heading"><div className={styles.urgentPanelHead}><div><span className={styles.kicker}>{t('Ask for support')}</span><h2 id="urgent-intake-heading">{createdRequestId ? t('Request created') : t('Request urgent help')}</h2></div><button type="button" className={styles.secondaryButton} onClick={() => setUrgentOpen(false)}>{t('Close')}</button></div>{createdRequestId ? <div className={styles.urgentReceipt} role="status"><CheckCircle size={22} aria-hidden="true" /><p>{t('Request added to response board.')}</p><a className={styles.smallLink} href="#response-queue" onClick={() => setUrgentOpen(false)}>{t('See on board')} <ArrowRight size={15} aria-hidden="true" /></a><Link href={`/requests/${encodeURIComponent(createdRequestId)}`} className={styles.smallLink}>{t('View request')} <ArrowRight size={15} aria-hidden="true" /></Link></div> : <IntakeForm key="urgent-intake" embedded initialUrgency="Urgent" onCreated={id => setCreatedRequestId(id)} />}</section>}
     {incident && <div className={styles.readiness}><WarningCircle size={20} aria-hidden="true" /><div><strong>{t('Readiness must be reconfirmed for this incident.')}</strong><span>{ownPending ? <>{ownPending} {t(state.actor.role === 'organization' ? 'of your listings still need a readiness update.' : 'of your active offers still need a readiness update.')}</> : t('Review your current availability before agreeing to help.')}</span></div><Link href={readinessHref}>{t(state.actor.role === 'organization' ? 'Manage resources' : 'Review my availability')} <ArrowRight size={16} aria-hidden="true" /></Link></div>}
     <DisasterPeople />
     <DisasterSupport />
-    <ResponseQueue />
+    <ResponseQueue highlightedId={createdRequestId} />
     <section className={styles.moreTools} aria-labelledby="more-tools-heading"><div><span className={styles.kicker}>{t('More response tools')}</span><h2 id="more-tools-heading">{t('Keep the work connected.')}</h2></div><div className={styles.toolLinks}><Link href="/donations"><Package size={20} aria-hidden="true" /><span><strong>{t('Supplies & donations')}</strong><small>{t('Track supply requests and contributions.')}</small></span><ArrowUpRight size={17} aria-hidden="true" /></Link><Link href="/activity"><HandHeart size={20} aria-hidden="true" /><span><strong>{t('My activity')}</strong><small>{t('Respond to connections and confirm received help.')}</small></span><ArrowUpRight size={17} aria-hidden="true" /></Link><Link href="/resources"><Buildings size={20} aria-hidden="true" /><span><strong>{t('Resource catalog')}</strong><small>{t('Browse all partner services and availability.')}</small></span><ArrowUpRight size={17} aria-hidden="true" /></Link>{state.actor.role === 'coordinator' && <Link href="/emergency"><ShieldCheck size={20} aria-hidden="true" /><span><strong>{t('Incident dashboard')}</strong><small>{t('Review restricted cases and incident-wide readiness.')}</small></span><ArrowUpRight size={17} aria-hidden="true" /></Link>}</div></section>
   </div>;
 }

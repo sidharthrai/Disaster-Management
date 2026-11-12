@@ -31,3 +31,7 @@ The [feature inventory](feature-status.md) separates implemented behavior from t
 ## Final integration evidence
 
 The earlier integration run passed 123 tests across 30 files, TypeScript checking and a clean production build. The latest run passed 168 tests across 46 files and type checking; eight HTTP scripts passed against isolated development servers, with live Ollama API verification performed separately. Browser verification observed organization submission and approval, follow-up status, coordinator helper filtering, expanded emergency review lists, resource-request prefill, recovery messages, map interaction, the disaster experience, and safe check-in/tip submissions. A full route-by-route browser walk remains pending. No production build was run for this batch. Optional microphone permission/live recognition, hosted AI, Docker, public deployment and a narrow browser viewport remain unverified. The main local application uses the development server at http://127.0.0.1:3000; no default database reset was performed during QA.
+
+## Latest demo build
+
+The inline urgent flow was verified in the rebuilt production demo: submission stayed on /disaster, displayed the response-board confirmation, and promoted the new Urgent request with a New badge. The latest full suite passed 169 tests across 46 files, TypeScript checking and the isolated optimized build. The app source is on the GitHub main branch. The revised main video targets 150 seconds and is being validated separately.

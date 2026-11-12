@@ -42,3 +42,9 @@ Provider output is provisional. The app validates it, applies independent safety
 People, organizations, qualifications, offers, resources, reports and outcomes in demo mode are synthetic. The identity selector is not authentication. Do not enter real personal or emergency information. Missing-person support is a private, fictional community workflow; it does not provide public search, live alerts or dispatch. The app does not provide medical advice or verify identities or qualifications.
 
 See [feature status](docs/feature-status.md) for implemented behavior and verification limits, [the original-handoff coverage audit](docs/original-handoff-coverage.md) for historical scope findings, and [the operating contract](docs/operations-contract.md) for command and data projection details. The docs do not claim a hosted Site or Docker deployment has been published and verified.
+
+## Fast presentation build
+
+Run `npm run demo:build`, then `npm run demo:start`. The optimized local demo starts at http://127.0.0.1:3005. Demo mode needs no password; choose a fictional member, coordinator or organization from the identity selector. Account mode uses registration and has no preset shared password.
+
+Urgent help opens inside Disaster Management. After reviewed submission, the page shows a receipt and highlights the new request on the response board.
