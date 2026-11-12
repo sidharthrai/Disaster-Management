@@ -37,17 +37,33 @@ export function seedState(): State {
   requests.push(privateRequest);
   for (let i = 0; i < 18; i++) requests.push(request(`req-${i + 6}`, `u-${8 + i % 20}`, [(['Groceries', 'Transport', 'Supplies', 'Community'] satisfies Category[])[i % 4]!], areas[i % 5]!, i * 2 + 1));
   const commitments: State['commitments'] = [];
+  const events: State['events'] = requests.map((r, i) => ({ id: `event-${i}`, requestId: r.id, actorId: r.requesterId, text: 'Request received. Details kept private; safe summary shared with the community.', at: r.createdAt }));
   for (let i = 0; i < 4; i++) {
     const r = requests[6 + i]!; const n = r.needs[0]!;
     const status = (['confirmed', 'confirmed', 'delivered', 'in_progress'] as const)[i]!;
+    const at = (hours: number) => new Date(Date.parse(r.createdAt) + hours * 3600000).toISOString();
+    const helperId = i % 2 ? 'u-eli' : 'u-teo';
     n.status = status === 'confirmed' ? 'resolved' : status === 'delivered' ? 'awaiting_confirmation' : 'in_progress';
-    commitments.push({ id: `seed-commit-${i}`, requestId: r.id, needId: n.id, helperId: i % 2 ? 'u-eli' : 'u-teo', offerId: null, resourceId: null,
-      requesterApproved: true, helperApproved: true, status, createdAt: hourFrom(-12), acceptedAt: hourFrom(-10), completedAt: status === 'in_progress' ? null : hourFrom(-7) });
-    r.windowStart = hourFrom(-12 - i * 5); r.windowEnd = hourFrom(-8 - i * 5);
+    commitments.push({ id: `seed-commit-${i}`, requestId: r.id, needId: n.id, helperId, offerId: null, resourceId: null,
+      requesterApproved: true, helperApproved: true, status, createdAt: at(0.25), acceptedAt: at(0.5), completedAt: status === 'in_progress' ? null : at(1) });
+    r.windowStart = at(0.5); r.windowEnd = at(2);
+    events.push(
+      { id: `seed-event-${i}-proposed`, requestId: r.id, actorId: r.requesterId, text: `Connection proposed for ${n.category.toLowerCase()}; both participants must agree.`, at: at(0.25) },
+      { id: `seed-event-${i}-accepted`, requestId: r.id, actorId: helperId, text: `Both participants agreed on ${n.category.toLowerCase()}. Private coordination is now available.`, at: at(0.5) },
+      { id: `seed-event-${i}-started`, requestId: r.id, actorId: helperId, text: `Assistance started for ${n.category.toLowerCase()}.`, at: at(0.75) },
+    );
+    if (status !== 'in_progress') events.push({ id: `seed-event-${i}-delivered`, requestId: r.id, actorId: helperId, text: `Helper reported ${n.category.toLowerCase()} delivered. Awaiting requester confirmation.`, at: at(1) });
+    if (status === 'confirmed') events.push({ id: `seed-event-${i}-confirmed`, requestId: r.id, actorId: r.requesterId, text: `Requester confirmed ${n.category.toLowerCase()} received. Other outstanding needs remain tracked.`, at: at(1.25) });
+    r.updatedAt = status === 'confirmed' ? at(1.25) : status === 'delivered' ? at(1) : at(0.75);
   }
-  return StateSchema.parse({ users, offers, resources, requests, commitments,
-    events: requests.map((r, i) => ({ id: `event-${i}`, requestId: r.id, actorId: r.requesterId, text: 'Request received. Details kept private; safe summary shared with the community.', at: r.createdAt })),
+  return StateSchema.parse({ organizationProfiles: [
+    { id: 'u-org', about: 'A community gathering place supporting neighbors with everyday essentials.', services: ['Groceries', 'Supplies', 'Community'], serviceAreas: ['Central Park', 'Riverside'], website: '' },
+    { id: 'u-shelter', about: 'Connecting neighbors with temporary shelter referrals.', services: ['Shelter'], serviceAreas: ['River Street'], website: '' },
+    { id: 'u-transport', about: 'Supporting accessible local transportation.', services: ['Transport'], serviceAreas: ['River Street'], website: '' },
+    { id: 'u-care', about: 'Connecting neighbors with care referrals.', services: ['Medical'], serviceAreas: ['Riverside'], website: '' },
+  ], users, offers, resources, requests, commitments,
+    events,
     messages: [], reports: [], settings: { now: DEMO_NOW, emergency: null } });
 }
 
-export function emptyState(): State { return StateSchema.parse({ users: [], offers: [], resources: [], requests: [], commitments: [], events: [], messages: [], reports: [], settings: { now: new Date().toISOString(), clockMode: 'live', emergency: null } }); }
+export function emptyState(): State { return StateSchema.parse({ organizationProfiles: [], users: [], offers: [], resources: [], requests: [], commitments: [], events: [], messages: [], reports: [], settings: { now: new Date().toISOString(), clockMode: 'live', emergency: null } }); }

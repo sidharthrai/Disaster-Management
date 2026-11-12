@@ -6,7 +6,7 @@ import { StateSchema, type State } from '../domain/model';
 import type { Repository } from '../domain/store';
 import { FollowUpService } from '../domain/followup';
 
-const tables = ['users', 'requests', 'offers', 'resources', 'commitments', 'events', 'messages', 'reports', 'coordinatorNotes', 'followUpEpisodes', 'notifications'] as const;
+const tables = ['peopleRecords', 'gatherings', 'volunteerProfiles', 'intakeDrafts', 'organizationApplications', 'organizationProfiles', 'users', 'requests', 'offers', 'resources', 'commitments', 'events', 'messages', 'reports', 'coordinatorNotes', 'followUpEpisodes', 'notifications'] as const;
 const PayloadSchema = z.object({ payload: z.string() });
 export class SqliteRepository implements Repository {
   private readonly db: Database.Database;
@@ -27,6 +27,7 @@ export class SqliteRepository implements Repository {
     const settings = this.db.prepare("SELECT payload FROM settings WHERE id = 'community'").get();
     result.settings = settings ? JSON.parse(PayloadSchema.parse(settings).payload) : undefined;
     const state = StateSchema.parse(result);
+    for (const request of state.requests) if (!request.updatedAt) request.updatedAt = request.createdAt;
     if (state.settings.clockMode === 'live') state.settings.now = new Date().toISOString();
     return state;
   }

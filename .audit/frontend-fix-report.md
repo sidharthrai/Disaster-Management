@@ -1,0 +1,6 @@
+# Frontend review fix report
+
+- Coordinator corrections preserve the original ISO timestamp, including seconds and milliseconds, for each untouched datetime field. Edited fields are validated and serialized independently, and invalid or reversed windows are rejected.
+- The network provider refreshes on workspace navigation, focus, visibility return, and every 20 seconds while visible. Foreground commands and identity changes abort or exclude background refreshes; a generation check prevents superseded responses from updating the snapshot. A current 401 hides the workspace and redirects to login.
+- Request detail refreshes on every successful snapshot refresh, including when public fields are unchanged. Same-actor, same-request detail remains mounted during refresh, preserving drafts and selected conversation. Identity and request changes clear private drafts, and thread changes clear the message draft. Authorization and missing-resource responses hide previously loaded detail. A failed concern submission now retains its draft.
+- Validation: `npm run typecheck` passed; `npx vitest run tests/frontend-state.test.ts` passed (3 tests). Vitest printed its existing Vite configuration deprecation warning. Browser verification of draft retention and cross-account updates remains assigned to the parent task.

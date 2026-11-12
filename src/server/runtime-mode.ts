@@ -1,4 +1,7 @@
-import { resolve } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+
+// Resolve at runtime without making the project directory a tracing root.
+const runtimePath = (path: string) => fileURLToPath(pathToFileURL(path));
 
 export function appMode(): 'demo' | 'accounts' {
   const mode = process.env.APP_MODE || 'demo';
@@ -15,5 +18,5 @@ export function accountConfig() {
   if (process.env.NODE_ENV === 'production' && url.protocol !== 'https:' && !['localhost', '127.0.0.1'].includes(url.hostname)) throw new Error('Production APP_BASE_URL must use HTTPS.');
   return { secret, baseURL: url.origin };
 }
-export const operationPath = () => resolve(process.cwd(), process.env.DATABASE_PATH || (appMode() === 'accounts' ? 'data/accounts-community.sqlite' : 'data/community.sqlite'));
-export const authPath = () => resolve(process.cwd(), process.env.AUTH_DATABASE_PATH || 'data/accounts-auth.sqlite');
+export const operationPath = () => runtimePath(process.env.DATABASE_PATH || (appMode() === 'accounts' ? 'data/accounts-community.sqlite' : 'data/community.sqlite'));
+export const authPath = () => runtimePath(process.env.AUTH_DATABASE_PATH || 'data/accounts-auth.sqlite');

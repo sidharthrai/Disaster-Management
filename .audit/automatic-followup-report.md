@@ -1,0 +1,9 @@
+# Automatic follow-up report
+
+The persistent Node process registers one unreferenced interval in `src/instrumentation.ts`. The process-global runner survives module reloads without starting duplicate timers. The interval invokes repository transactions, which use live server time for account mode and preserve simulated time in demo mode. Reconciliation preserves coordinator episodes, resolves conditions that disappear, and adds generic recipient-specific reminders at most once per episode and recipient. It does not assign, confirm, or close requests.
+
+`FOLLOW_UP_INTERVAL_MINUTES` accepts an integer from 1 through 60 and defaults to 1 for missing or invalid values. The first tick occurs after one interval. A build-phase guard avoids starting the timer during production builds. This is a single-process timer and requires a running persistent Node server.
+
+`GET /api/follow-ups/status` is coordinator-only and returns `{ running, intervalMinutes, nextRunAt, lastRunAt, lastError }`. Times are ISO strings or null. Errors are generic. The endpoint uses private no-store headers. Existing manual evaluation remains available. The status is process-local, and a stopped process cannot serve it.
+
+Focused verification passed with `npx vitest run tests/automatic-followup.test.ts tests/followup-operations.test.ts` (9 tests). Tests exercise elapsed live time, a fixed demo clock, repeated ticks, resolution, restricted recipient privacy, idle helper and confirmation requester reminders. The existing recurrence test now expects both coordinator and requester notifications and verifies their recipient IDs, preserving its deduplication check. `npx tsc --noEmit --incremental false` encountered an unresolved organization-approvals component import in another worker's in-progress files. Build, running server, HTTP, and browser checks were outside this assignment.

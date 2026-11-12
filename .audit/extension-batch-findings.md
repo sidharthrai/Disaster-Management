@@ -1,0 +1,11 @@
+# Extension batch review fixes
+
+Scope is the completed organization directory, community activity feed and coordinator insights batch. Activity passed independent review. Fix profiles and insights together without changing the core lifecycle.
+
+1. Organization editor must explicitly gate editing/saving during identityChanging, global busy or local saving. Abort/generation-scope loads/save/refetch to current actor. Root Workspace already masks/remounts children across identities, so do not claim a demonstrated private-data leak; preserve and reinforce that boundary rather than relying on unguarded callbacks.
+2. Refresh authoritative organization approval/qualification/profile data on network revisions, preserving intentional unsaved profile edits. Avoid overwriting edits while save/refetch is pending by locking controls or using a submitted-draft acknowledgment. Qualification revocation must update the directory without a hard reload.
+3. Missing-person service advertising has no implemented eligible matching/referral path. Reject saving that advertised service and suppress legacy records from the directory, or clearly show an unavailable-review-only state. Prefer rejection/suppression consistent with medical eligibility enforcement. Do not change matching to invent such a path.
+4. Insights median excludes creation or acceptance timestamps after state.settings.now, in addition to missing/invalid/negative intervals. Add regression cases for future acceptance and future creation, report excluded samples accurately.
+5. Add client-safe shared response schemas for organization directory and insights, and parse successful JSON before rendering. Preserve existing response shapes. Malformed responses should show an error instead of crashing page rendering.
+
+Assigned files domain/organizations.ts, components/organizations.tsx, domain/analytics.ts, components/insights.tsx, tests/organizations.test.ts, tests/analytics.test.ts. Do not touch the profile-array model/repository shape, matching, NetworkService, navigation, package or other community-tools features. No Git, no app database changes. Root owns production builds while browsers/standalone servers are active; run focused tests/typecheck only.

@@ -1,0 +1,9 @@
+# Organization profiles handoff
+
+The organization directory projects organization accounts in the current actor's community. Account name, verification, synthetic status, and qualifications come from authoritative users; descriptions, advertised categories, general areas, and HTTPS websites are separately self-described. Organizations can update only their own profile. The API accepts no identity, role, verification, or qualification fields. Medical category advertising requires current verification and medical qualification, and is suppressed from the projection if either is later revoked. No eligibility or matching logic was changed.
+
+The repository creates a new profile table without resetting existing data. The state schema defaults missing profiles to an empty array, including account-mode empty state. The fixture adds fictional demo profiles. Websites are validated as HTTPS without userinfo, never fetched, and opened with `noopener noreferrer`.
+
+`GET /api/organizations` returns `{ organizations: [{ id, name, verified, synthetic, qualifiedCategories, profile }] }`, where `profile` is null or `{ about, services, serviceAreas, website }`. `PUT /api/organizations` accepts exactly `{ about, services, serviceAreas, website }` for the signed-in organization and returns `{ ok: true }`. The page component is exported as `Organizations` and is available at `/organizations`.
+
+Verification: `npx vitest run tests/organizations.test.ts tests/persistence.test.ts` passed 6 tests, including ownership, rejected privilege fields, medical authorization, cross-community filtering, revocation, old-table migration, and persistence after reopening SQLite. `npx tsc --noEmit` passed after the parallel analytics module was added. Browser save/reload and final styling remain for the root integration pass.

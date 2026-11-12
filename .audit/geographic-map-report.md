@@ -1,0 +1,9 @@
+# Geographic map handoff
+
+The neighborhood page displays an interactive Leaflet map using public OpenStreetMap tiles, with pan and zoom and attribution. Five fictional Riverton areas are assigned fixed illustrative points on a Chicago map. These points are not incident locations, GPS coordinates, routes, shelters, or a live hazard feed. Markers use only counts already supplied by the privacy-filtered neighborhood projection. Selecting a marker or an area button updates the same details panel; area buttons remain usable when tiles fail.
+
+The browser requests map tiles from OpenStreetMap; tile availability depends on network access and the public tile service. A tile or map library failure displays a message directing users to the area buttons. The map does not request user location.
+
+Verification: `npx vitest run tests/map-data.test.ts tests/neighborhoods.test.ts` passed (3 tests). The tests verify complete, distinct illustrative positions and existing neighborhood privacy behavior. Browser interaction, live tile loading, and the tile-failure display have not been verified in this scoped work. Leaflet and its TypeScript declarations were installed by the dependency owner. `npm run typecheck` reported no map-file errors but failed on undefined `t` references in `src/components/offers.tsx` during separate translation work. The central locale dictionary still needs to incorporate the exported `mapSpanish` translations.
+
+A follow-up preserves the last successful same-identity data during background refreshes, so the map retains pan and zoom. Failed refreshes display a notice; identity changes still hide previous data. Zoom controls update their visible title and accessible label when the locale changes. Focused verification: 4 tests passed across map data and neighborhood tests, and `npm run typecheck` passed. Browser verification of refresh behavior and translated controls remains pending.

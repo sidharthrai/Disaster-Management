@@ -1,3 +1,4 @@
 ts	stage	decision	evidence	result
 2026-11-11T23:37:46.350776+00:00	plan	Plan full scope before implementation; inspect Sites rather than assume its login is portable.	docs/ecosystem-completion-plan.md; Sites skill and list_sites	Node deployment path chosen under no-Git; baseline 27 tests and typecheck passed
 2026-11-11T23:42:41.057739+00:00	stage1	Gated signed preview and explicit reviewed timing/urgency before operations work.	30 Vitest tests; typecheck; build; live HTTP smoke on isolated port3001	all passed; temporary demo DB retained; no Git
+2026-11-12T00:17:41.208662+00:00	parallelism	Activated eight granular feature workers after user restart.	Live collaboration tool accepted eight spawns; .audit/ecosystem-worker-ownership.md	Git authorized; root owns repository mutations; code ownership disjoint

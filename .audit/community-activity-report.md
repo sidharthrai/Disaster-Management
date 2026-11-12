@@ -1,0 +1,7 @@
+# Community activity handoff
+
+Implemented a signed-in activity projection at `/api/community/activity` and a standalone `/community-activity` workspace page. The reusable `CommunityActivity` component accepts an optional `compact` boolean; compact mode displays up to five items without a page heading. The endpoint returns `{ items: [{ id, requestId, kind, area, categories, at }] }`, with `kind` either `posted` or `confirmed`.
+
+The endpoint authenticates and synchronizes through `NetworkService.snapshot`, then projects persisted state. Restricted and other-community requests are excluded. Posting is derived once from each request's creation timestamp; confirmed help requires the exact known requester transition and a confirmed commitment for that need. Event text, names, notes and intake data are never returned. Results are sorted by timestamp descending and stable ID ascending, capped at 30. The client aborts obsolete requests and gates displayed data by identity and network revision.
+
+Verification: `npx vitest run tests/community-activity.test.ts` passed (3 tests). `npm run typecheck` was blocked by the concurrently edited analytics test importing a not-yet-present `src/domain/analytics` module; rerun after that feature lands. Browser verification and navigation integration remain for root integration. The existing seed has confirmed commitments without confirmation events, so those historical records do not invent confirmation timestamps.

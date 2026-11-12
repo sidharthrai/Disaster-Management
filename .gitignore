@@ -18,6 +18,7 @@ data/
 !.env.*.example
 *.tsbuildinfo
 *.log
+*recovery*outbox*.jsonl
 .DS_Store
 .sites-runtime/
 .openai/*credential*

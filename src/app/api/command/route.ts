@@ -25,7 +25,18 @@ export async function POST(request: Request) {
       case 'clock': service.advanceClock(actor, command.hours); break;
       case 'report': service.report(actor, command.requestId, command.reason); break;
       case 'moderate': service.moderate(actor, command.id, command.hide); break;
-      case 'reset': requireCondition(service.snapshot(actor).actor.role === 'coordinator', 'Only a coordinator can reset the demo.', 403); repository().replace(seedState()); break;
+      case 'assignCoordinator': service.assignCoordinator(actor, command.requestId, command.coordinatorId); break;
+      case 'correctRequest': service.correctRequest(actor, command.requestId, command.input); break;
+      case 'addCoordinatorNote': service.addCoordinatorNote(actor, command.requestId, command.text); break;
+      case 'followUpSettings': service.followUpSettings(actor, command.input); break;
+      case 'evaluateFollowUps': service.evaluateFollowUps(actor); break;
+      case 'acknowledgeFollowUp': service.acknowledgeFollowUp(actor, command.id); break;
+      case 'resolveFollowUp': service.resolveFollowUp(actor, command.id); break;
+      case 'escalateFollowUp': service.escalateFollowUp(actor, command.id, command.coordinatorId, command.note); break;
+      case 'markNotificationRead': service.markNotificationRead(actor, command.id); break;
+      case 'createResource': id = service.createResource(actor, command.input); break;
+      case 'editResource': service.editResource(actor, command.id, command.input); break;
+      case 'reset': requireCondition(service.snapshot(actor).settings.clockMode === 'demo', 'Reset is disabled in live mode.', 403); requireCondition(service.snapshot(actor).actor.role === 'coordinator', 'Only a coordinator can reset the demo.', 403); repository().replace(seedState()); break;
       default: { const exhaustive: never = command; throw new Error(String(exhaustive)); }
     }
     return Response.json({ ok: true, id }, { headers: privateHeaders });

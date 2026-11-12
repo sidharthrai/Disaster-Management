@@ -1,10 +1,11 @@
 import { z } from 'zod';
+import { accountConfig, appMode } from './runtime-mode';
 import { DomainError, requireCondition } from '../domain/model';
 export function sameOrigin(request: Request) {
   const origin = request.headers.get('origin');
   const requestUrl = new URL(request.url);
   const incomingHost = request.headers.get('host');
-  const expectedOrigin = incomingHost ? new URL(`${requestUrl.protocol}//${incomingHost}`).origin : requestUrl.origin;
+  const expectedOrigin = appMode() === 'accounts' ? accountConfig().baseURL : incomingHost ? new URL(`${requestUrl.protocol}//${incomingHost}`).origin : requestUrl.origin;
   requireCondition(origin === expectedOrigin, 'Cross-origin or missing-origin mutations are not allowed.', 403);
   requireCondition(request.headers.get('content-type')?.includes('application/json'), 'Send a JSON request.', 415);
 }

@@ -1,0 +1,15 @@
+# Local automation and account workflows
+
+The user authorized automatic follow-up, account recovery and organization approval screens on November 11, 2026, while final verification of the previous extension batch continued. Keep the app local and retain the existing mutual-consent, private-case and requester-confirmation rules.
+
+## Contracts and sequence
+
+1. Automatic follow-up: run a bounded, configurable, single-process timer in the persistent Node server; reconcile current conditions transactionally without browser traffic. Use server time in account mode and the explicit simulated clock in demo mode. Add at most one appropriate participant reminder per episode and recipient, keep coordinator episodes and access checks, and never confirm delivery, assign volunteers or close cases automatically. Expose coordinator-only runner status and retain manual evaluation. Verify elapsed-time processing, repeated ticks, resolution and privacy with isolated state.
+2. Account recovery: reuse Better Auth token generation, expiry, consumption, password validation and session revocation. Add forgot/reset screens with generic request responses and useful invalid/expired-link errors. Deliver local reset messages only to a private filesystem outbox on a loopback account installation; never expose it through an unauthenticated API or log tokens. Document an operator command to read the outbox and pass the link to the local tester. Remote email delivery remains unconfigured and must fail closed rather than pretend to send. Verify token expiry/replay and old-session revocation using fictional accounts through HTTP.
+3. Organization approval: persist same-community applications with applicant identity, submitted details, status and decision history. Members apply; coordinators review and approve/decline with a reason, with no self-approval or cross-community access. Approval grants ordinary organization status and verification, never medical qualifications. Support withdrawal and coordinator revocation of ordinary approval, preserving records and letting existing eligibility checks exclude unverified resources. Protect drafts and saves across identity changes. Verify permissions, state transitions, qualification boundaries and resource eligibility.
+
+Implementation is split across exclusive file sets. Workers may run focused tests and typecheck, but root owns dependencies, navigation integration, production builds, server restarts, browser verification and Git. No concurrent production builds. Root will run one consolidated independent review batch, route findings to the owners, then run full tests, typecheck, build and actual HTTP/browser checks.
+
+## Constraints and risks
+
+The timer requires a running persistent Node process and is not a hosted scheduler. Local recovery does not prove mailbox ownership; anyone with filesystem access to the private outbox is a trusted local operator. Approval records are administrative decisions, not external identity or qualification verification. Existing SQLite storage remains single-instance. No external messages, public deployment or real emergency dispatch are authorized by this batch.

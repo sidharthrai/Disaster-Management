@@ -1,0 +1,7 @@
+# Extension fix report
+
+- Organization directory and save responses are validated at the client boundary. The editor aborts actor-scoped work, gates controls during identity changes, global work, saves and refetches, refreshes on network revisions, and preserves dirty drafts during revision refreshes. Same-actor role changes reset the editor. A revoked medical qualification is reflected in the directory; a previously selected dirty medical service can still be unchecked.
+- Saving missing-person service advertisements is rejected and legacy advertisements are suppressed from directory projections. This does not implement a matching or referral path.
+- Insights excludes accepted-request samples with future creation or acceptance timestamps and validates response JSON before rendering. Response schemas strip unknown top-level and directory organization fields.
+- Focused checks: `npx vitest run tests/organizations.test.ts tests/analytics.test.ts` passed (12 tests); `npm run typecheck` passed. The tests first reproduced both future timestamp and legacy missing-person failures. Vitest emitted its existing Vite native config warning.
+- No production build or browser runtime test was run; the root agent owns those checks. The tests cover service permissions and projection, validation and timing, but do not exercise React identity-change and refresh races in a browser. Workspace already masks/remounts on identity change; no cross-identity leak was established.

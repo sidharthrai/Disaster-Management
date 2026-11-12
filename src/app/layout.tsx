@@ -2,5 +2,6 @@ import '@fontsource/geist/400.css';
 import '@fontsource/geist/500.css';
 import '@fontsource/geist/600.css';
 import './globals.css';
+import { LocaleProvider } from '@/components/locale-context';
 export const metadata = { title: 'Community Help Network', description: 'Neighbors helping neighbors in Riverton.' };
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="en"><body>{children}</body></html>; }
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="en"><body><LocaleProvider>{children}</LocaleProvider></body></html>; }

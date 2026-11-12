@@ -2,9 +2,13 @@ import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
 import { AreaSchema, CategorySchema, DomainError, isActive, requestStatus, requireCondition, type Commitment, type HelpRequest, type PublicRequest, type State, type User } from './model';
 import type { Repository } from './store';
+import { CommandSchema, type Command } from './commands';
 import type { VerifiedPreview } from '../server/intake-preview';
 import { MatchingService } from './matching';
 import { FollowUpService } from './followup';
+import { NotificationService } from './notifications';
+import { ResourceService } from './resources';
+import { buildEmergencyDashboard } from './emergency';
 import { publicSummary, safeTitle, safetyFlags } from './safety';
 
 import { CreateRequestSchema, CreateOfferSchema, type CreateRequestInput, type CreateOfferInput } from './inputs';
@@ -19,39 +23,42 @@ export class NetworkService {
     return request;
   }
   private coordinator(user: User) { requireCondition(user.role === 'coordinator', 'Coordinator permission is required.', 403); }
-  private event(state: State, requestId: string, actorId: string, text: string) { state.events.push({ id: randomUUID(), requestId, actorId, text, at: state.settings.now }); }
+  private event(state: State, requestId: string, actorId: string, text: string) { const id = randomUUID(); state.events.push({ id, requestId, actorId, text, at: state.settings.now }); new NotificationService().notifyEvent(state, requestId, id, actorId); }
   private publicRequest(request: HelpRequest): PublicRequest {
-    const { rawContent: _raw, safetyFlags: _flags, reviewedBy: _review, intakeProvenance: _provenance, ...safe } = request;
-    return { ...safe, closure: safe.closure ? { ...safe.closure, reason: 'Administrative outcome recorded privately.' } : null };
+    return { id: request.id, communityId: request.communityId, requesterId: request.requesterId, title: request.title, summary: request.summary, area: request.area, windowStart: request.windowStart, windowEnd: request.windowEnd, urgency: request.urgency, restricted: request.restricted, source: request.source, needs: request.needs, createdAt: request.createdAt, assignedCoordinatorId: request.assignedCoordinatorId, updatedAt: request.updatedAt, incidentId: request.incidentId, closure: request.closure ? { outcome: request.closure.outcome, actorId: request.closure.actorId, at: request.closure.at, reason: 'Administrative outcome recorded privately.' } : null };
   }
   private canCoordinate(state: State, request: HelpRequest, user: User) {
     return user.role === 'coordinator' || user.id === request.requesterId || state.commitments.some(c => c.requestId === request.id && c.helperId === user.id && (isActive(c) || c.status === 'confirmed'));
   }
+  private synchronizedState(userId: string) { return this.repository.transaction(state => { this.user(state, userId); new FollowUpService().reconcile(state); return structuredClone(state); }); }
   publicOverview() {
     const state = this.repository.read();
     const requests = state.requests.filter(r => r.communityId === 'riverton' && !r.restricted);
     return { metrics: { members: state.users.filter(u => u.communityId === 'riverton').length, offers: state.offers.filter(o => o.communityId === 'riverton' && o.active).length, confirmed: requests.filter(r => requestStatus(r) === 'Resolved').length, open: requests.filter(r => !r.closure && requestStatus(r) !== 'Resolved').length }, examples: requests.filter(r => !r.closure && requestStatus(r) !== 'Resolved').slice(0, 4).flatMap(r => r.needs.filter(n => n.status === 'open').map(n => ({ category: n.category, area: r.area, windowEnd: r.windowEnd }))).slice(0, 4) };
   }
   snapshot(userId: string) {
-    const state = this.repository.read(); const actor = this.user(state, userId);
+    const state = this.synchronizedState(userId); const actor = this.user(state, userId);
     const requests = state.requests.filter(r => r.communityId === actor.communityId && (!r.restricted || r.requesterId === actor.id || actor.role === 'coordinator' || (actor.role === 'organization' && actor.verified && state.commitments.some(c => c.requestId === r.id && c.helperId === actor.id && !['cancelled', 'rejected'].includes(c.status)))));
     const commitments = state.commitments.filter(c => requests.some(r => r.id === c.requestId) && (actor.role === 'coordinator' || c.helperId === actor.id || requests.some(r => r.id === c.requestId && r.requesterId === actor.id)));
-    return { actor, users: state.users.filter(u => u.communityId === actor.communityId), requests: requests.map(r => ({ ...this.publicRequest(r), status: requestStatus(r), flags: new FollowUpService().evaluate(state, r) })),
-      offers: state.offers.filter(o => o.communityId === actor.communityId).map(o => ({ ...o, description: o.userId === actor.id ? o.description : `Offers ${o.categories.join(', ').toLowerCase()} in ${o.area}.` })),
+    return { actor, users: state.users.filter(u => u.communityId === actor.communityId), requests: requests.map(r => ({ ...this.publicRequest(r), status: requestStatus(r), flags: new FollowUpService().evaluate(state, r), escalated: actor.role === 'coordinator' && state.followUpEpisodes.some(e => e.requestId === r.id && !e.resolvedAt && e.escalations.length > 0) })),
+      offers: state.offers.filter(o => o.communityId === actor.communityId).map(o => o.userId === actor.id ? o : { ...o, affiliation: undefined, description: `Offers ${o.categories.join(', ').toLowerCase()} in ${o.area}.` }),
       resources: state.resources.filter(r => r.communityId === actor.communityId), commitments, settings: state.settings,
+      notifications: state.notifications.filter(n => n.recipientId === actor.id && requests.some(r => r.id === n.requestId)).map(({ id, requestId, kind, text, createdAt, readAt }) => ({ id, requestId, kind, text, createdAt, readAt })),
+      emergencyDashboard: actor.role === 'coordinator' ? buildEmergencyDashboard(state, actor) : null,
       reports: actor.role === 'coordinator' ? state.reports.filter(report => requests.some(r => r.id === report.requestId)) : [],
       metrics: { members: state.users.filter(u => u.communityId === actor.communityId).length, open: requests.filter(r => !r.closure && requestStatus(r) !== 'Resolved').length,
         confirmed: requests.filter(r => requestStatus(r) === 'Resolved').length, needsAttention: requests.filter(r => new FollowUpService().evaluate(state, r).length > 0).length,
         offers: state.offers.filter(o => o.communityId === actor.communityId && o.active).length } };
   }
   detail(userId: string, requestId: string) {
-    const state = this.repository.read(); const actor = this.user(state, userId); const request = this.request(state, actor, requestId);
+    const state = this.synchronizedState(userId); const actor = this.user(state, userId); const request = this.request(state, actor, requestId);
     const allowed = this.canCoordinate(state, request, actor);
     const ownerOrCoordinator = actor.id === request.requesterId || actor.role === 'coordinator';
     const commitments = state.commitments.filter(c => c.requestId === requestId && (ownerOrCoordinator || c.helperId === actor.id));
     return { request: this.publicRequest(request), status: requestStatus(request), rawContent: ownerOrCoordinator ? request.rawContent : null,
       safetyFlags: ownerOrCoordinator ? request.safetyFlags : [], reviewedBy: ownerOrCoordinator ? request.reviewedBy : null,
-      closureReason: ownerOrCoordinator ? request.closure?.reason ?? null : null,
+      closureReason: ownerOrCoordinator ? request.closure?.reason ?? null : null, intakeProvenance: ownerOrCoordinator ? request.intakeProvenance : null,
+      coordinatorNotes: actor.role === 'coordinator' ? state.coordinatorNotes.filter(n => n.requestId === requestId) : [], followUpEpisodes: actor.role === 'coordinator' ? state.followUpEpisodes.filter(e => e.requestId === requestId) : [],
       canCoordinate: allowed, commitments,
       messages: state.messages.filter(m => m.requestId === requestId && (ownerOrCoordinator || (m.commitmentId !== null && commitments.some(c => c.id === m.commitmentId && c.helperId === actor.id && (isActive(c) || c.status === 'confirmed'))))),
       events: state.events.filter(e => e.requestId === requestId && (ownerOrCoordinator || e.actorId === actor.id)),
@@ -75,7 +82,7 @@ export class NetworkService {
       state.requests.unshift({ id, communityId: actor.communityId, requesterId: actor.id, title: safeTitle(categories), summary: publicSummary(categories), rawContent: parsed.text,
         area: parsed.area, windowStart: parsed.windowStart, windowEnd: parsed.windowEnd, urgency: flags.length ? 'Critical review' : parsed.urgency ?? (/urgent|asap/i.test(parsed.text) ? 'Urgent' : 'Routine'),
         safetyFlags: flags, restricted: flags.length > 0, source: parsed.source,
-        needs: categories.map(category => ({ id: randomUUID(), category, status: 'open' })), createdAt: state.settings.now, reviewedBy: null, intakeProvenance: preview && parsed.urgency ? { ...preview.result, suggestedUrgency: preview.result.extraction.urgency, selectedUrgency: parsed.urgency } : null, closure: null });
+        needs: categories.map(category => ({ id: randomUUID(), category, status: 'open' })), createdAt: state.settings.now, updatedAt: state.settings.now, assignedCoordinatorId: null, incidentId: state.settings.emergency?.id ?? null, reviewedBy: null, intakeProvenance: preview && parsed.urgency ? { ...preview.result, suggestedUrgency: preview.result.extraction.urgency, selectedUrgency: parsed.urgency } : null, closure: null });
       this.event(state, id, actor.id, flags.length ? 'Private request received. Authorized human review required.' : 'Request posted with a safe summary. Original intake is private.');
       return id;
     });
@@ -164,6 +171,7 @@ export class NetworkService {
         this.event(state, request.id, actor.id, `Requester confirmed ${need.category.toLowerCase()} received. Other outstanding needs remain tracked.`); return;
       }
       requireCondition(actor.id === c.helperId, 'Only the assigned helper can report progress.', 403);
+      this.request(state, actor, request.id);
       if (action === 'start') { requireCondition(c.status === 'accepted', 'Start requires an agreed connection.'); c.status = 'in_progress'; need.status = 'in_progress'; }
       if (action === 'deliver') { requireCondition(c.status === 'in_progress', 'Start assistance before reporting delivery.'); c.status = 'delivered'; c.completedAt = state.settings.now; need.status = 'awaiting_confirmation'; }
       this.event(state, request.id, actor.id, action === 'start' ? `Assistance started for ${need.category.toLowerCase()}.` : `Helper reported ${need.category.toLowerCase()} delivered. Awaiting requester confirmation.`);
@@ -208,12 +216,37 @@ export class NetworkService {
       requireCondition(actor.id === offer.userId, 'Only an offer owner can update availability.', 403); offer.active = active; offer.readyForEvent = ready ? state.settings.emergency?.id ?? null : null; });
   }
   setResource(userId: string, id: string, capacity: number, active: boolean, ready: boolean) {
-    this.repository.transaction(state => { const actor = this.user(state, userId); const resource = state.resources.find(r => r.id === id && r.communityId === actor.communityId); requireCondition(resource, 'Resource not found.', 404);
-      requireCondition(actor.id === resource.ownerId, 'Only the organization owning a resource can reaffirm availability.', 403);
-      requireCondition(Number.isInteger(capacity) && capacity >= resource.reserved && capacity <= 10000, 'Capacity must cover current reservations and be at most 10,000.');
-      resource.capacity = capacity; resource.active = active; resource.verifiedAt = state.settings.now; resource.readyForEvent = ready ? state.settings.emergency?.id ?? null : null; });
+    this.repository.transaction(state => new ResourceService().setAvailability(state, this.user(state, userId), id, capacity, active, ready));
   }
-  advanceClock(userId: string, hours: number) { this.repository.transaction(state => { this.coordinator(this.user(state, userId)); requireCondition(Number.isInteger(hours) && hours >= 0 && hours <= 24, 'Advance between 0 and 24 hours.'); state.settings.now = new Date(Date.parse(state.settings.now) + hours * 3600000).toISOString(); }); }
+  advanceClock(userId: string, hours: number) { this.repository.transaction(state => { this.coordinator(this.user(state, userId)); requireCondition(state.settings.clockMode === 'demo', 'Clock controls are disabled in live mode.', 403); requireCondition(Number.isInteger(hours) && hours >= 0 && hours <= 24, 'Advance between 0 and 24 hours.'); state.settings.now = new Date(Date.parse(state.settings.now) + hours * 3600000).toISOString(); }); }
+  assignCoordinator(userId: string, requestId: string, coordinatorId: string | null) { this.repository.transaction(state => { const actor = this.user(state, userId); this.coordinator(actor); const request = this.request(state, actor, requestId); if (coordinatorId) requireCondition(state.users.some(u => u.id === coordinatorId && u.communityId === actor.communityId && u.role === 'coordinator'), 'Choose a coordinator in this community.'); request.assignedCoordinatorId = coordinatorId; request.updatedAt = state.settings.now; this.event(state, requestId, actor.id, 'Coordinator assignment updated.'); }); }
+  addCoordinatorNote(userId: string, requestId: string, text: string) { this.repository.transaction(state => { const actor = this.user(state, userId); this.coordinator(actor); this.request(state, actor, requestId); state.coordinatorNotes.push({ id: randomUUID(), requestId, actorId: actor.id, text: z.string().trim().min(1).max(2000).parse(text), at: state.settings.now }); }); }
+  correctRequest(userId: string, requestId: string, input: Extract<Command, { type: 'correctRequest' }>['input']) { const parsed = CommandSchema.parse({ type: 'correctRequest', requestId, input }); if (parsed.type !== 'correctRequest') throw new DomainError('Invalid correction.'); input = parsed.input; this.repository.transaction(state => {
+    const actor = this.user(state, userId); this.coordinator(actor); const request = this.request(state, actor, requestId); const categories = [...new Set(input.categories)];
+    requireCondition(Date.parse(input.windowEnd) > Date.parse(input.windowStart), 'End time must be after start time.');
+    const changedWindow = request.area !== input.area || request.windowStart !== input.windowStart || request.windowEnd !== input.windowEnd;
+    requireCondition(!changedWindow || !state.commitments.some(c => c.requestId === requestId && isActive(c)), 'Area and time cannot change while commitments are active.');
+    for (const need of request.needs) if (!categories.includes(need.category)) requireCondition(!state.commitments.some(c => c.needId === need.id), 'Needs with commitment history cannot be removed or reclassified.');
+    const sensitive = categories.some(c => c === 'Medical' || c === 'Missing person'); const material = changedWindow || request.urgency !== input.urgency || categories.length !== request.needs.length || request.needs.some(n => !categories.includes(n.category));
+    request.needs = [...request.needs.filter(n => categories.includes(n.category)), ...categories.filter(c => !request.needs.some(n => n.category === c)).map(category => ({ id: randomUUID(), category, status: 'open' as const }))];
+    request.area = input.area; request.windowStart = input.windowStart; request.windowEnd = input.windowEnd; request.urgency = request.restricted || sensitive ? 'Critical review' : input.urgency; request.title = safeTitle(categories); request.summary = publicSummary(categories); request.updatedAt = state.settings.now;
+    if (material) request.reviewedBy = null;
+    if (sensitive && !request.restricted) { request.restricted = true; request.safetyFlags.push('sensitive'); for (const c of state.commitments.filter(c => c.requestId === requestId && (isActive(c) || c.status === 'proposed'))) { const helper = state.users.find(u => u.id === c.helperId); if (c.resourceId && helper?.role === 'organization' && helper.verified) continue; this.releaseResource(state, c); const need = request.needs.find(n => n.id === c.needId); if (need && isActive(c)) need.status = 'open'; c.status = 'cancelled'; } }
+    state.coordinatorNotes.push({ id: randomUUID(), requestId, actorId: actor.id, text: input.note, at: state.settings.now }); this.event(state, requestId, actor.id, 'Coordinator corrected case details.');
+  }); }
+  followUpSettings(userId: string, input: State['settings']['followUp']) { const parsed = CommandSchema.parse({ type: 'followUpSettings', input }); if (parsed.type !== 'followUpSettings') throw new DomainError('Invalid settings.'); input = parsed.input; this.repository.transaction(state => { this.coordinator(this.user(state, userId)); state.settings.followUp = input; }); }
+  evaluateFollowUps(userId: string) { this.repository.transaction(state => { this.coordinator(this.user(state, userId)); }); }
+  private episode(state: State, userId: string, id: string) { const actor = this.user(state, userId); this.coordinator(actor); const episode = state.followUpEpisodes.find(e => e.id === id); requireCondition(episode, 'Follow-up not found.', 404); this.request(state, actor, episode.requestId); return { actor, episode }; }
+  acknowledgeFollowUp(userId: string, id: string) { this.repository.transaction(state => { const { actor, episode } = this.episode(state, userId, id); requireCondition(!episode.resolvedAt, 'Follow-up is already resolved.'); episode.acknowledgedAt = state.settings.now; episode.acknowledgedBy = actor.id; this.event(state, episode.requestId, actor.id, 'Coordinator acknowledged a follow-up.'); }); }
+  resolveFollowUp(userId: string, id: string) { this.repository.transaction(state => { const { actor, episode } = this.episode(state, userId, id); const request = state.requests.find(r => r.id === episode.requestId); requireCondition(request && !new FollowUpService().evaluate(state, request).some(f => f.kind === episode.kind && f.subjectId === episode.subjectId), 'The underlying condition remains active.'); if (!episode.resolvedAt) { episode.resolvedAt = state.settings.now; this.event(state, episode.requestId, actor.id, 'Coordinator resolved a follow-up.'); } }); }
+  escalateFollowUp(userId: string, id: string, coordinatorId: string, note: string) { this.repository.transaction(state => { const { actor, episode } = this.episode(state, userId, id); requireCondition(!episode.resolvedAt, 'Follow-up is already resolved.'); requireCondition(state.users.some(u => u.id === coordinatorId && u.communityId === actor.communityId && u.role === 'coordinator'), 'Choose a coordinator in this community.'); episode.escalations.push({ actorId: actor.id, coordinatorId, note: z.string().trim().min(1).max(2000).parse(note), at: state.settings.now }); this.event(state, episode.requestId, actor.id, 'Coordinator escalated a follow-up.'); }); }
+  markNotificationRead(userId: string, id: string) { this.repository.transaction(state => { const actor = this.user(state, userId); const notification = state.notifications.find(n => n.id === id && n.recipientId === actor.id); requireCondition(notification, 'Notification not found.', 404); this.request(state, actor, notification.requestId); notification.readAt ??= state.settings.now; }); }
+  createResource(userId: string, input: Extract<Command, { type: 'createResource' }>['input']) {
+    return this.repository.transaction(state => new ResourceService().create(state, this.user(state, userId), input));
+  }
+  editResource(userId: string, id: string, input: Extract<Command, { type: 'editResource' }>['input']) {
+    this.repository.transaction(state => new ResourceService().edit(state, this.user(state, userId), id, input));
+  }
   report(userId: string, requestId: string, reason: string) {
     const text = z.string().trim().min(8).max(500).parse(reason);
     this.repository.transaction(state => { const actor = this.user(state, userId); this.request(state, actor, requestId); state.reports.push({ id: randomUUID(), requestId, actorId: actor.id, reason: text, at: state.settings.now, resolved: false }); });

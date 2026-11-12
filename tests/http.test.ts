@@ -20,3 +20,16 @@ it('accepts the browser origin for the incoming host when the framework uses an 
   const crossOrigin = new Request('http://localhost:3000/api/command', { method: 'POST', headers: { Host: '127.0.0.1:3000', Origin: 'http://attacker.example', 'Content-Type': 'application/json' }, body: '{}' });
   expect(() => sameOrigin(crossOrigin)).toThrow();
 });
+
+it('uses the configured HTTPS origin behind an HTTP reverse proxy', () => {
+  const previous = { ...process.env };
+  try {
+    process.env.APP_MODE = 'accounts';
+    process.env.APP_BASE_URL = 'https://community.example';
+    process.env.BETTER_AUTH_SECRET = 'a'.repeat(32);
+    const request = (origin: string) => new Request('http://localhost:3000/api/command', { method: 'POST', headers: { host: 'community.example', origin, 'content-type': 'application/json', 'x-forwarded-proto': 'https' }, body: '{}' });
+    expect(() => sameOrigin(request('https://community.example'))).not.toThrow();
+    expect(() => sameOrigin(request('http://community.example'))).toThrow();
+    expect(() => sameOrigin(request('https://attacker.example'))).toThrow();
+  } finally { process.env = previous; }
+});

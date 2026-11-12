@@ -1,34 +1,44 @@
 # Community Help Network
 
-Community Help Network is a local demo of everyday mutual aid that a community can reuse during an emergency. Members can post safe summaries, offer help, agree to a connection, and coordinate privately after both sides consent. Coordinators can review sensitive cases and follow up when a request stalls.
+Community Help Network is a local mutual-aid demonstration for everyday needs and simulated emergencies. Members can post requests and offers, agree to connect, and coordinate privately after consent. Coordinators can review restricted cases, follow up on stalled requests, and manage simulated incident readiness.
 
-## Start the app
+## Run the local demo
 
-Use Node.js with npm, then run these commands from the project directory:
+Use Node.js with npm:
 
 ```sh
-npm install
+npm ci
 npm run dev
 ```
 
-Open http://127.0.0.1:3000. The app stores synthetic community data in `data/community.sqlite`. The default intake provider needs no API key and uses deterministic extraction. Run `npm run demo:reset` to replace the local database with the seeded demo data.
+Open http://127.0.0.1:3000 and choose **Enter demo**. The app creates fictional seed data in `data/community.sqlite`. The deterministic intake provider works without an API key. Run `npm run demo:reset` to restore the local demo database.
 
-This checkout was installed with `npm install --cache /private/tmp/community-help-npm-cache --legacy-peer-deps` because the managed environment restricted the default cache and its npm resolver failed. Use that fallback if the normal install fails in the same environment. The interface uses custom shared controls; shadcn/ui and Astryx are not integrated.
+Follow the [two-to-three-minute demo](docs/demo.md) to see request creation, mutual agreement, outcome confirmation, coordinator follow-up, and incident readiness. The local app also supports private intake drafts, neighborhood gatherings, opt-in volunteer profiles, self-described offer affiliation, English and Spanish core interface text, browser speech input, a Chicago map with illustrative markers, and a private community missing-person support workflow.
 
-Use `npm run build` to create a production build and `npm start` to serve it on `127.0.0.1:3000`. Run `npm test` for the Vitest suite and `npm run typecheck` for the TypeScript check. While the app is running, execute `node scripts/demo-check.mjs` for local HTTP checks. Pass a base URL as the first argument or set `DEMO_BASE_URL` to target another local instance. The smoke script does not reset the database and leaves two uniquely named requests for inspection.
+## Run checks
+
+```sh
+npm run typecheck
+npm test
+npm run build
+```
+
+For a production build on the local machine, run `npm start`. The development and production commands bind to `127.0.0.1:3000`. While the app is running, `node scripts/demo-check.mjs` runs HTTP checks against the local server; it does not reset the database and leaves two uniquely named requests for inspection.
+
+## Use account mode
+
+Account mode provides password sign-up and sign-in for a single Node service. Set `APP_MODE=accounts`, an HTTPS `APP_BASE_URL`, and a stable `BETTER_AUTH_SECRET` with at least 32 characters. Keep the authentication and community SQLite files separate and persistent. Account mode starts with an empty community database; new signups receive the member role.
+
+Read [the Node deployment guide](docs/deployment.md) for setup, account-role provisioning, container configuration, storage, and known limits. Password reset links are written to a private local outbox for an operator to deliver manually; remote email delivery is disabled. Member applications and coordinator decisions provide ordinary organization approval, not qualification verification.
 
 ## Configure optional intake providers
 
-Copy `.env.example` to `.env.local` only if you want to select another intake provider. `AI_PROVIDER=ollama` selects an Ollama service already running at `OLLAMA_BASE_URL`; the default model name is `llama3.2:3b`. The app does not download models. `AI_PROVIDER=hosted` selects the OpenAI-compatible hosted adapter. Set its server-only API key, base URL, and model name in the server environment. Keep credentials out of browser code and source control.
+Copy `.env.example` to `.env.local` only when you want a non-default provider. `AI_PROVIDER=ollama` uses an Ollama service that is already running at `OLLAMA_BASE_URL`; the default model is `llama3.2:3b`. The app does not download models. `AI_PROVIDER=hosted` uses an OpenAI-compatible endpoint configured with server-only credentials and model settings.
 
-If a selected provider is unavailable, times out, or returns invalid structured data, intake falls back to deterministic extraction. Provider output remains provisional. The app independently retains source-supported area and timing, does not infer a people count, and applies safety flags. It never grants permissions, changes case state, or dispatches help based on model output.
+Provider output is provisional. The app validates it, applies independent safety checks, and falls back to deterministic extraction if the provider fails. Model output cannot grant permissions, assign people, change case state, or dispatch help. Keep provider credentials out of browser code and source control. A live Ollama check is available with `npm run check:live-ai -- http://127.0.0.1:3004` when a demo server is running against the local Ollama service; hosted inference has not been configured.
 
-## Demo boundaries
+## Scope and evidence
 
-The seeded members, organizations, offers, resources, verification labels, messages, and outcomes are synthetic. The identity selector is for this local demo. It is not production authentication and does not verify a person's identity or qualifications. Do not put real personal or emergency information in this demo.
+People, organizations, qualifications, offers, resources, reports and outcomes in demo mode are synthetic. The identity selector is not authentication. Do not enter real personal or emergency information. Missing-person support is a private, fictional community workflow; it does not provide public search, live alerts or dispatch. The app does not provide medical advice or verify identities or qualifications.
 
-The app accepts bounded text intake, validates structured fields, and keeps original request text private. Members see a safe summary and general neighborhood. Private coordination requires an agreed commitment. Medical and missing-person content is restricted for human review. The app does not provide diagnosis, treatment, rescue dispatch, real alerts, live SMS or social ingestion, or real-world identity verification.
-
-The SQLite database is intended for one local app instance. Do not run multiple app instances against the same file or use this setup as a public production service. Production use needs real authentication, an operational privacy and security review, and a database and deployment design for concurrent service.
-
-See [the two-to-three-minute demo](docs/demo.md) for the presentation path, [feature status](docs/feature-status.md) for implementation evidence, and [the original-handoff coverage audit](docs/original-handoff-coverage.md) for completed, simulated, partial and missing requirements. The audit identifies three open intake defects and does not claim full original-handoff completion.
+See [feature status](docs/feature-status.md) for implemented behavior and verification limits, [the original-handoff coverage audit](docs/original-handoff-coverage.md) for historical scope findings, and [the operating contract](docs/operations-contract.md) for command and data projection details. The docs do not claim a hosted Site or Docker deployment has been published and verified.

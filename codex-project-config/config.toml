@@ -1,21 +1,4 @@
-# Copy this file and the adjacent agents/ directory into this project's .codex/.
-# This file is intentionally not active while the current build is running.
-model = "gpt-6.1-sol"
-model_reasoning_effort = "high"
-approval_policy = "on-request"
-approvals_reviewer = "auto_review"
-sandbox_mode = "workspace-write"
-
-developer_instructions = """
-Plan before inspection, edits or delegation. Use small, verifiable implementation stages.
-Do not run Git commands, create commits or worktrees, or publish until the user authorizes it.
-Use Terra for substantial implementation, Luna for bounded lightweight work, and Sol or Terra for independent review.
-Give parallel writers disjoint file ownership. Coordinate shared types before implementation.
-Keep community data private by role. Label synthetic identities, incidents and integrations.
-Keep core workflows functional without AI credentials. Validate external input and AI output.
-Verify changed behavior with appropriate tests and the running application before reporting success.
-Do not send messages or make external deployments without explicit authorization.
-"""
+# Project agent overrides. Other settings inherit the normal Codex configuration.
 
 [agents]
 enabled = true

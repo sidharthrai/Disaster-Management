@@ -1,0 +1,7 @@
+# Help entry points
+
+Request details display the complete case reference with clipboard success and failure feedback. Open, ordinary needs without a match owned by the current helper link to the offer form with category, neighborhood, and the full request reference. The form validates the return target against the current actor's visible snapshot, displays the request window, and offers a return link after a successful save. Creating an offer does not propose a connection. Ordinary resource cards link to the existing request form; medical and missing-person categories are excluded.
+
+Verification: `npm run typecheck -- --incremental false` passed; `npx vitest run tests/network.test.ts tests/resource-operations.test.ts` passed (18 tests). The existing tests exercise network and resource behavior, not the new UI or clipboard; browser verification was outside the assigned scope. No build, server, dependency installation, or Git operation was performed.
+
+Known integration constraint: matching currently requires an offer to begin no later than the request's original window start, but newly created offers begin at the current time or later. An open request whose window has already begun therefore cannot match a new offer. The coordinating agent was notified; the matching rule is outside these files. During an incident, users must also confirm readiness on the saved offer before it can match.

@@ -1,0 +1,7 @@
+# Live AI verification
+
+On 2026-11-11, the existing Ollama server at `127.0.0.1:11434` reported the installed `ministral-3:3b` model. An isolated demo server on port 3004 used that model, a temporary SQLite path, and a 60-second provider timeout. No model was downloaded and no hosted credentials were configured in the checked environment or `.env` files.
+
+A fictional message, “Two people need groceries today,” was submitted to `POST /api/intake`. The response identified `Ollama local model`, had no warning, passed the application's extraction schema, preserved the expected grocery category, people count and timing, and included a signed preview token. The end-to-end request took 6,053 ms on this run; this is an observation, not a benchmark. A direct invocation of the actual provider and intake service also passed without fallback.
+
+The repeatable check is `AI_PROVIDER=ollama npx tsx scripts/live-ai-check.mjs http://127.0.0.1:3004` against a separately running demo server configured with Ollama. It exits nonzero when the expected provider is not used or validation fails. Against the existing deterministic demo server on port 3003, it exited nonzero and identified the deterministic provider, confirming it does not mistake that result for a live model response. The isolated port 3004 server was stopped after the check. The test does not establish model quality across other inputs or hosted-provider connectivity.

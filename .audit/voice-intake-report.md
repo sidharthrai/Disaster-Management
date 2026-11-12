@@ -1,0 +1,5 @@
+# Optional browser voice intake
+
+The optional control starts browser speech recognition only after a user click. It discloses that the browser may process speech through its own service and retains typing or pasting as a fallback. Final recognition results are passed to the supplied callback; this component does not analyze, submit, or store audio. Stop permits final results to arrive, while cancel, disabling, and unmount discard later events and abort the recognizer. The integration should key the component by actor identity and append finalized transcript text through the same edit path as typed input.
+
+Verification: `npx vitest run tests/speech-intake.test.ts` passed 6 tests covering explicit start, final-only deduplication, stop, cancellation and queued results, unsupported browsers, and recognition errors. `npm run typecheck` passed during implementation. These use a mock recognizer; actual speech recognition, browser permission prompts, and service availability have not been tested with a microphone. Browser support and processing location depend on the browser and its service.

@@ -1,0 +1,7 @@
+# Optional local experience batch
+
+The user requested a fresh Sol High frontend redesign lead and continued parallel implementation. The core local workflows are implemented. This batch adds a clearly separated disaster-management landing experience, an inviting navigation and visual system, public aggregate impact reporting, optional browser speech intake, and a local English/Spanish navigation and intake language layer.
+
+The design lead owns shared visual files and delegates disjoint visual work. Public impact projects only nonrestricted ordinary requests and requester-confirmed outcomes, with synthetic/live labels and no identities or raw text. Speech capture starts only after an explicit user action and the browser permission flow, exposes unsupported/error/stopped states, and always leaves pasted-text intake available; browser service availability and processing location are described honestly. Language selection changes presentation while canonical category/source values and safety rules remain unchanged; untranslated operational views remain labeled as English.
+
+No new production build, external account, model download, outbound messaging, actual dispatch or real geographic claim is part of this batch. The fictional neighborhood view remains a schematic. Root verifies the running development app, focused tests, combined typechecking and the existing HTTP journeys after integration.

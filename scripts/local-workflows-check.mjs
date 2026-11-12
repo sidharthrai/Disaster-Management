@@ -1,0 +1,60 @@
+import assert from 'node:assert/strict';
+import { randomUUID } from 'node:crypto';
+
+const base = (process.argv[2] || process.env.DEMO_BASE_URL || 'http://127.0.0.1:3001').replace(/\/$/, '');
+const origin = new URL(base).origin;
+console.log('Use an isolated demo server. This check leaves fictional applications, decisions, requests and resources; it changes the applicant role and verification.');
+async function request(path, person, body, expected = 200) {
+  const headers = { Origin: origin };
+  if (body !== undefined) headers['Content-Type'] = 'application/json';
+  if (person.cookie) headers.Cookie = person.cookie;
+  const response = await fetch(base + path, { method: body === undefined ? 'GET' : 'POST', headers, body: body === undefined ? undefined : JSON.stringify(body), redirect: 'manual' });
+  const cookie = response.headers.get('set-cookie');
+  if (cookie) person.cookie = cookie.split(';', 1)[0];
+  assert.equal(response.status, expected, `${path}: unexpected status`);
+  return response.json();
+}
+const people = { applicant: {}, member: {}, coordinator: {} };
+for (const [person, id] of [[people.applicant, 'u-29'], [people.member, 'u-mira'], [people.coordinator, 'u-coord']]) await request('/api/session', person, { id });
+const { applicant, member, coordinator } = people;
+const state = person => request('/api/state', person);
+const command = (person, body) => request('/api/command', person, body);
+const before = await state(applicant);
+assert.equal(before.settings.clockMode, 'demo', 'Use an isolated demo server');
+assert.ok(before.actor.synthetic && (before.actor.role === 'member' || (before.actor.role === 'organization' && !before.actor.verified)), 'Applicant must be a fictional eligible account');
+await request('/api/follow-ups/status', member, undefined, 403);
+assert.equal((await request('/api/follow-ups/status', coordinator)).running, true);
+
+const description = `Fictional application ${randomUUID()}`;
+await request('/api/organization-approvals', applicant, { action: 'apply', input: { description, services: ['Supplies'], serviceAreas: ['Central Park'] } });
+const applications = (await request('/api/organization-approvals', applicant)).applications;
+const application = applications.find(item => item.description === description);
+assert.ok(application && application.applicantId === 'u-29' && application.status === 'pending');
+assert.ok(!(await request('/api/organization-approvals', member)).applications.some(item => item.id === application.id), 'Another member can see the application');
+assert.ok((await request('/api/organization-approvals', coordinator)).applications.some(item => item.id === application.id));
+const decision = { action: 'approve', id: application.id, reason: 'Fictional local approval' };
+await request('/api/organization-approvals', coordinator, decision);
+await request('/api/organization-approvals', coordinator, decision, 409);
+assert.equal((await request('/api/organization-approvals', applicant)).applications.find(item => item.id === application.id).status, 'approved');
+const approved = (await state(applicant)).actor;
+assert.equal(approved.role, 'organization');
+assert.equal(approved.verified, true);
+assert.ok(!approved.qualifiedCategories.includes('Medical') && !approved.qualifiedCategories.includes('Missing person'));
+
+const resource = await command(applicant, { type: 'createResource', input: { name: `Fictional resource ${randomUUID()}`, description: 'Local workflow test', category: 'Supplies', area: 'Central Park', capacityMode: 'consumable', capacity: 3 } });
+if ((await state(coordinator)).settings.emergency) await command(applicant, { type: 'resource', id: resource.id, capacity: 3, active: true, ready: true });
+const now = (await state(coordinator)).settings.now;
+const text = `Fictional supplies request ${randomUUID()}`;
+const preview = await request('/api/intake', member, { text, source: 'Website' });
+const created = await command(member, { type: 'createRequest', input: { text, source: 'Website', categories: ['Supplies'], area: 'Central Park', windowStart: new Date(Date.parse(now) + 3600000).toISOString(), windowEnd: new Date(Date.parse(now) + 7200000).toISOString(), previewToken: preview.previewToken, urgency: 'Routine', timingConfirmed: true } });
+const detail = () => request(`/api/requests/${encodeURIComponent(created.id)}`, member);
+const board = () => request('/api/donations', member);
+assert.ok((await detail()).matches.some(item => item.id === resource.id));
+assert.equal((await board()).resources.find(item => item.id === resource.id)?.units, 3);
+await request('/api/organization-approvals', coordinator, { action: 'revoke', id: application.id, reason: 'Fictional local revocation' });
+assert.equal((await request('/api/organization-approvals', applicant)).applications.find(item => item.id === application.id).status, 'revoked');
+assert.equal((await state(applicant)).actor.verified, false);
+assert.ok(!(await detail()).matches.some(item => item.id === resource.id));
+assert.ok(!(await board()).resources.some(item => item.id === resource.id));
+await request('/api/organization-approvals', coordinator, { action: 'revoke', id: application.id, reason: 'Repeated fictional revocation' }, 409);
+console.log(`Local workflow HTTP checks passed for ${base}. Fictional records and role changes remain in the isolated demo database.`);

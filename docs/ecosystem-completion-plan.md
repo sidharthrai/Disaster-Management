@@ -1,5 +1,7 @@
 # Ecosystem completion plan
 
+Current steering: the user subsequently authorized Git and restarted Codex with eight subagents. Git setup/checkpoints are now owned by root. Earlier no-Git constraints below describe the planning stage and are superseded. The active work division is the granular feature ownership in `.audit/ecosystem-worker-ownership.md`. Node remains the chosen deployment target; Sites still requires a Worker/D1 migration.
+
 The user authorized implementation on November 11, 2026. This plan precedes application edits. It covers the three reproduced defects, coordinator operations, follow-up, emergency dashboard and a practical authenticated Node deployment foundation. Git remains off, including commands, worktrees, commits and pushes.
 
 ## Result and boundaries

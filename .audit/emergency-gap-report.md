@@ -1,0 +1,7 @@
+# Emergency dashboard gap report
+
+The coordinator-only emergency dashboard now separates generally available and unavailable community resource listings, explains eligibility failures, shows each listing's remaining and reserved units without summing unlike units, and groups shelter and transport listings with their partners. Availability applies current matching prerequisites for active status, capacity, freshness, incident readiness, owner verification and medical qualification; a particular match still depends on the request. Simulated owners are identified.
+
+The cases-needing-review queue uses the existing restricted-review and urgent-owner-review follow-up rules for open cases in the coordinator's community. The snapshot projection includes only the fields needed for the dashboard. The existing member snapshot remains without a dashboard or unrelated restricted requests.
+
+Verification: `npx vitest run tests/emergency.test.ts` passed four tests covering ordering, eligibility, community isolation, snapshot schema preservation, review completion and member privacy. A project-wide `npx tsc --noEmit --pretty false` was attempted while another worker's `incident-actions` files were incomplete and failed on that unrelated module and its test. No browser, server, or build check was run within the assigned scope. The supplied original vision file has 644 physical lines, so the cited lines 856–858 were not available in that file.

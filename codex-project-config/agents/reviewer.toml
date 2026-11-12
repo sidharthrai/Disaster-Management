@@ -1,4 +1,3 @@
 model = "gpt-6.1-sol"
 model_reasoning_effort = "high"
-sandbox_mode = "read-only"
 developer_instructions = "Review independently. Prioritize correctness, authorization, sensitive-data exposure, migration safety and user-visible behavior. Inspect the original requirements as well as the implementation plan. Cite concrete files and actionable findings. Do not modify files, run Git, deploy or claim tests were run unless you ran them."

@@ -2,11 +2,14 @@ import { z } from 'zod';
 import { DetailSchema, IntakePreviewSchema, SnapshotSchema } from '../domain/views';
 import type { Command } from '../domain/commands';
 import { SourceSchema } from '../domain/inputs';
+export class ApiError extends Error {
+  constructor(message: string, readonly status: number) { super(message); }
+}
 async function readResponse(response: Response): Promise<unknown> {
   const body: unknown = await response.json();
   if (!response.ok) {
     const error = z.object({ error: z.string() }).safeParse(body);
-    throw new Error(error.success ? error.data.error : 'The request failed. Please try again.');
+    throw new ApiError(error.success ? error.data.error : 'The request failed. Please try again.', response.status);
   }
   return body;
 }

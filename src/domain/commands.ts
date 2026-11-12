@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { CreateOfferSchema, CreateRequestSchema } from './inputs';
+import { AreaSchema, CategorySchema, UrgencySchema, FollowUpSettingsSchema } from './model';
 const id = z.string().min(1).max(100);
 export const CommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('createRequest'), input: CreateRequestSchema }),
@@ -16,6 +17,17 @@ export const CommandSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('clock'), hours: z.number().int().min(0).max(24) }),
   z.object({ type: z.literal('report'), requestId: id, reason: z.string().trim().min(8).max(500) }),
   z.object({ type: z.literal('moderate'), id, hide: z.boolean() }),
+  z.object({ type: z.literal('assignCoordinator'), requestId: id, coordinatorId: id.nullable() }),
+  z.object({ type: z.literal('correctRequest'), requestId: id, input: z.object({ categories: z.array(CategorySchema).min(1).max(7), area: AreaSchema, windowStart: z.iso.datetime(), windowEnd: z.iso.datetime(), urgency: UrgencySchema, note: z.string().trim().min(1).max(2000) }) }),
+  z.object({ type: z.literal('addCoordinatorNote'), requestId: id, text: z.string().trim().min(1).max(2000) }),
+  z.object({ type: z.literal('followUpSettings'), input: FollowUpSettingsSchema }),
+  z.object({ type: z.literal('evaluateFollowUps') }),
+  z.object({ type: z.literal('acknowledgeFollowUp'), id }),
+  z.object({ type: z.literal('resolveFollowUp'), id }),
+  z.object({ type: z.literal('escalateFollowUp'), id, coordinatorId: id, note: z.string().trim().min(1).max(2000) }),
+  z.object({ type: z.literal('markNotificationRead'), id }),
+  z.object({ type: z.literal('createResource'), input: z.object({ name: z.string().trim().min(1).max(200), description: z.string().trim().max(1000), category: CategorySchema, area: AreaSchema, capacityMode: z.enum(['consumable', 'concurrent']), capacity: z.number().int().min(1).max(10000) }) }),
+  z.object({ type: z.literal('editResource'), id, input: z.object({ name: z.string().trim().min(1).max(200), description: z.string().trim().max(1000), category: CategorySchema, area: AreaSchema, capacityMode: z.enum(['consumable', 'concurrent']), capacity: z.number().int().min(1).max(10000), active: z.boolean(), ready: z.boolean() }) }),
   z.object({ type: z.literal('reset') }),
 ]);
 export type Command = z.infer<typeof CommandSchema>;

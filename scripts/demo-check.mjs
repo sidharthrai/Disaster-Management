@@ -54,6 +54,10 @@ assert.equal(intake.data.extraction.area, 'Central Park', 'No-key intake did not
 assert.equal(intake.data.provider, 'Deterministic fallback', 'The smoke check requires the default no-key provider.');
 
 const initial = await snapshot(personas.mira);
+if (initial.settings.emergency) {
+  await mutate(personas.naila, { type: 'emergency', event: null });
+  process.stdout.write('Cleared the active simulated incident in this test database before everyday matching checks.\n');
+}
 const now = initial.settings.now;
 const windowStart = new Date(Date.parse(now) + 60 * 60_000).toISOString();
 const windowEnd = new Date(Date.parse(now) + 3 * 60 * 60_000).toISOString();
