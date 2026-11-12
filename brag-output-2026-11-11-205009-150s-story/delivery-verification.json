@@ -1,0 +1,51 @@
+{
+  "file_bytes": 38080603,
+  "sha256": "9d5c02f72a80dca921f0835cc5197e43a5a178614b41cca1fe910d644f1cc455",
+  "duration_seconds": 150.0,
+  "target_seconds": 150,
+  "under_180_seconds": true,
+  "video_dimensions": [
+    [
+      1920,
+      1080
+    ]
+  ],
+  "aac_audio": true,
+  "audio_rms": 0.17671013795999607,
+  "audible": true,
+  "fresh_script_words": 324,
+  "exported_speech_end": 145.34,
+  "required_story_checks": {
+    "disaster": true,
+    "before that moment": true,
+    "everyday help": true,
+    "grocery run": true,
+    "suggested connections": true,
+    "both participants": true,
+    "private coordination": true,
+    "confirm the outcome": true,
+    "group activities": true,
+    "local organizations": true,
+    "when disaster strikes": true,
+    "urgent requests": true,
+    "missing person": true,
+    "voluntary safe check-ins": true,
+    "permission": true,
+    "children": true,
+    "shared privately": true,
+    "self-reported": true,
+    "shelter": true,
+    "transport": true,
+    "supplies": true,
+    "geographic map": true,
+    "not live dispatch": true,
+    "unresolved requests": true,
+    "confirmation": true,
+    "before the crisis": true
+  },
+  "poster_baked_frame_zero": true,
+  "check_passed": true,
+  "contrast_checks_passed": 25,
+  "teaser_preserved": "../brag-output-2026-11-11-211500-disaster-revision/brag.mp4",
+  "all_required_story_checks_passed": true
+}

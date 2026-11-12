@@ -1,0 +1,1992 @@
+[
+  {
+    "start": 0.0,
+    "end": 1.94,
+    "text": " when disaster disrupts a community.",
+    "words": [
+      {
+        "word": " when",
+        "start": 0.0,
+        "end": 0.12
+      },
+      {
+        "word": " disaster",
+        "start": 0.12,
+        "end": 0.74
+      },
+      {
+        "word": " disrupts",
+        "start": 0.74,
+        "end": 1.42
+      },
+      {
+        "word": " a",
+        "start": 1.42,
+        "end": 1.48
+      },
+      {
+        "word": " community.",
+        "start": 1.48,
+        "end": 1.94
+      }
+    ]
+  },
+  {
+    "start": 2.56,
+    "end": 5.86,
+    "text": " The need for help can grow faster than people can find it.",
+    "words": [
+      {
+        "word": " The",
+        "start": 2.56,
+        "end": 2.6
+      },
+      {
+        "word": " need",
+        "start": 2.6,
+        "end": 2.9
+      },
+      {
+        "word": " for",
+        "start": 2.9,
+        "end": 3.16
+      },
+      {
+        "word": " help",
+        "start": 3.16,
+        "end": 3.5
+      },
+      {
+        "word": " can",
+        "start": 3.5,
+        "end": 3.74
+      },
+      {
+        "word": " grow",
+        "start": 3.74,
+        "end": 4.04
+      },
+      {
+        "word": " faster",
+        "start": 4.04,
+        "end": 4.6
+      },
+      {
+        "word": " than",
+        "start": 4.6,
+        "end": 4.78
+      },
+      {
+        "word": " people",
+        "start": 4.78,
+        "end": 5.1
+      },
+      {
+        "word": " can",
+        "start": 5.1,
+        "end": 5.34
+      },
+      {
+        "word": " find",
+        "start": 5.34,
+        "end": 5.62
+      },
+      {
+        "word": " it.",
+        "start": 5.62,
+        "end": 5.86
+      }
+    ]
+  },
+  {
+    "start": 6.46,
+    "end": 8.48,
+    "text": " Someone needs a safe place to stay.",
+    "words": [
+      {
+        "word": " Someone",
+        "start": 6.46,
+        "end": 6.84
+      },
+      {
+        "word": " needs",
+        "start": 6.84,
+        "end": 7.28
+      },
+      {
+        "word": " a",
+        "start": 7.28,
+        "end": 7.48
+      },
+      {
+        "word": " safe",
+        "start": 7.48,
+        "end": 7.68
+      },
+      {
+        "word": " place",
+        "start": 7.68,
+        "end": 8.02
+      },
+      {
+        "word": " to",
+        "start": 8.02,
+        "end": 8.2
+      },
+      {
+        "word": " stay.",
+        "start": 8.2,
+        "end": 8.48
+      }
+    ]
+  },
+  {
+    "start": 9.16,
+    "end": 12.46,
+    "text": " Someone else has supplies, a vehicle, or time to give.",
+    "words": [
+      {
+        "word": " Someone",
+        "start": 9.16,
+        "end": 9.44
+      },
+      {
+        "word": " else",
+        "start": 9.44,
+        "end": 9.78
+      },
+      {
+        "word": " has",
+        "start": 9.78,
+        "end": 10.0
+      },
+      {
+        "word": " supplies,",
+        "start": 10.0,
+        "end": 10.48
+      },
+      {
+        "word": " a",
+        "start": 10.82,
+        "end": 10.9
+      },
+      {
+        "word": " vehicle,",
+        "start": 10.9,
+        "end": 11.3
+      },
+      {
+        "word": " or",
+        "start": 11.64,
+        "end": 11.82
+      },
+      {
+        "word": " time",
+        "start": 11.82,
+        "end": 12.06
+      },
+      {
+        "word": " to",
+        "start": 12.06,
+        "end": 12.22
+      },
+      {
+        "word": " give.",
+        "start": 12.22,
+        "end": 12.46
+      }
+    ]
+  },
+  {
+    "start": 13.1,
+    "end": 15.22,
+    "text": " But requests and offers can be scattered",
+    "words": [
+      {
+        "word": " But",
+        "start": 13.1,
+        "end": 13.26
+      },
+      {
+        "word": " requests",
+        "start": 13.26,
+        "end": 13.7
+      },
+      {
+        "word": " and",
+        "start": 13.7,
+        "end": 14.1
+      },
+      {
+        "word": " offers",
+        "start": 14.1,
+        "end": 14.44
+      },
+      {
+        "word": " can",
+        "start": 14.44,
+        "end": 14.68
+      },
+      {
+        "word": " be",
+        "start": 14.68,
+        "end": 14.82
+      },
+      {
+        "word": " scattered",
+        "start": 14.82,
+        "end": 15.22
+      }
+    ]
+  },
+  {
+    "start": 15.84,
+    "end": 18.66,
+    "text": " and finding the right connection becomes another problem.",
+    "words": [
+      {
+        "word": " and",
+        "start": 15.56,
+        "end": 15.9
+      },
+      {
+        "word": " finding",
+        "start": 15.9,
+        "end": 16.3
+      },
+      {
+        "word": " the",
+        "start": 16.3,
+        "end": 16.5
+      },
+      {
+        "word": " right",
+        "start": 16.5,
+        "end": 16.66
+      },
+      {
+        "word": " connection",
+        "start": 16.66,
+        "end": 17.2
+      },
+      {
+        "word": " becomes",
+        "start": 17.2,
+        "end": 17.64
+      },
+      {
+        "word": " another",
+        "start": 17.64,
+        "end": 18.1
+      },
+      {
+        "word": " problem.",
+        "start": 18.1,
+        "end": 18.66
+      }
+    ]
+  },
+  {
+    "start": 19.32,
+    "end": 21.8,
+    "text": " Community help network begins before that moment.",
+    "words": [
+      {
+        "word": " Community",
+        "start": 19.32,
+        "end": 19.68
+      },
+      {
+        "word": " help",
+        "start": 19.68,
+        "end": 20.02
+      },
+      {
+        "word": " network",
+        "start": 20.02,
+        "end": 20.34
+      },
+      {
+        "word": " begins",
+        "start": 20.34,
+        "end": 20.78
+      },
+      {
+        "word": " before",
+        "start": 20.78,
+        "end": 21.22
+      },
+      {
+        "word": " that",
+        "start": 21.22,
+        "end": 21.48
+      },
+      {
+        "word": " moment.",
+        "start": 21.48,
+        "end": 21.8
+      }
+    ]
+  },
+  {
+    "start": 22.4,
+    "end": 23.98,
+    "text": " It gives neighbors a shared place",
+    "words": [
+      {
+        "word": " It",
+        "start": 22.4,
+        "end": 22.56
+      },
+      {
+        "word": " gives",
+        "start": 22.56,
+        "end": 22.74
+      },
+      {
+        "word": " neighbors",
+        "start": 22.74,
+        "end": 23.18
+      },
+      {
+        "word": " a",
+        "start": 23.18,
+        "end": 23.36
+      },
+      {
+        "word": " shared",
+        "start": 23.36,
+        "end": 23.64
+      },
+      {
+        "word": " place",
+        "start": 23.64,
+        "end": 23.98
+      }
+    ]
+  },
+  {
+    "start": 23.98,
+    "end": 27.02,
+    "text": " to ask for everyday help and offer what they can.",
+    "words": [
+      {
+        "word": " to",
+        "start": 23.98,
+        "end": 24.2
+      },
+      {
+        "word": " ask",
+        "start": 24.2,
+        "end": 24.54
+      },
+      {
+        "word": " for",
+        "start": 24.54,
+        "end": 24.74
+      },
+      {
+        "word": " everyday",
+        "start": 24.74,
+        "end": 25.16
+      },
+      {
+        "word": " help",
+        "start": 25.16,
+        "end": 25.6
+      },
+      {
+        "word": " and",
+        "start": 25.6,
+        "end": 26.0
+      },
+      {
+        "word": " offer",
+        "start": 26.0,
+        "end": 26.34
+      },
+      {
+        "word": " what",
+        "start": 26.34,
+        "end": 26.56
+      },
+      {
+        "word": " they",
+        "start": 26.56,
+        "end": 26.7
+      },
+      {
+        "word": " can.",
+        "start": 26.7,
+        "end": 27.02
+      }
+    ]
+  },
+  {
+    "start": 27.78,
+    "end": 30.88,
+    "text": " A grocery run, a ride, a small task",
+    "words": [
+      {
+        "word": " A",
+        "start": 27.56,
+        "end": 27.88
+      },
+      {
+        "word": " grocery",
+        "start": 27.88,
+        "end": 28.16
+      },
+      {
+        "word": " run,",
+        "start": 28.16,
+        "end": 28.52
+      },
+      {
+        "word": " a",
+        "start": 28.96,
+        "end": 29.28
+      },
+      {
+        "word": " ride,",
+        "start": 29.28,
+        "end": 29.58
+      },
+      {
+        "word": " a",
+        "start": 30.08,
+        "end": 30.32
+      },
+      {
+        "word": " small",
+        "start": 30.32,
+        "end": 30.56
+      },
+      {
+        "word": " task",
+        "start": 30.56,
+        "end": 30.88
+      }
+    ]
+  },
+  {
+    "start": 30.88,
+    "end": 32.58,
+    "text": " that makes a difficult day easier.",
+    "words": [
+      {
+        "word": " that",
+        "start": 30.88,
+        "end": 31.14
+      },
+      {
+        "word": " makes",
+        "start": 31.14,
+        "end": 31.3
+      },
+      {
+        "word": " a",
+        "start": 31.3,
+        "end": 31.44
+      },
+      {
+        "word": " difficult",
+        "start": 31.44,
+        "end": 31.78
+      },
+      {
+        "word": " day",
+        "start": 31.78,
+        "end": 32.06
+      },
+      {
+        "word": " easier.",
+        "start": 32.06,
+        "end": 32.58
+      }
+    ]
+  },
+  {
+    "start": 33.3,
+    "end": 35.78,
+    "text": " Each connection helps a community practice showing up",
+    "words": [
+      {
+        "word": " Each",
+        "start": 33.3,
+        "end": 33.46
+      },
+      {
+        "word": " connection",
+        "start": 33.46,
+        "end": 33.92
+      },
+      {
+        "word": " helps",
+        "start": 33.92,
+        "end": 34.2
+      },
+      {
+        "word": " a",
+        "start": 34.2,
+        "end": 34.36
+      },
+      {
+        "word": " community",
+        "start": 34.36,
+        "end": 34.8
+      },
+      {
+        "word": " practice",
+        "start": 34.8,
+        "end": 35.24
+      },
+      {
+        "word": " showing",
+        "start": 35.24,
+        "end": 35.56
+      },
+      {
+        "word": " up",
+        "start": 35.56,
+        "end": 35.78
+      }
+    ]
+  },
+  {
+    "start": 35.78,
+    "end": 36.4,
+    "text": " for one another.",
+    "words": [
+      {
+        "word": " for",
+        "start": 35.78,
+        "end": 35.96
+      },
+      {
+        "word": " one",
+        "start": 35.96,
+        "end": 36.12
+      },
+      {
+        "word": " another.",
+        "start": 36.12,
+        "end": 36.4
+      }
+    ]
+  },
+  {
+    "start": 37.04,
+    "end": 39.44,
+    "text": " Describe what you need, review the details,",
+    "words": [
+      {
+        "word": " Describe",
+        "start": 37.04,
+        "end": 37.44
+      },
+      {
+        "word": " what",
+        "start": 37.44,
+        "end": 37.7
+      },
+      {
+        "word": " you",
+        "start": 37.7,
+        "end": 37.84
+      },
+      {
+        "word": " need,",
+        "start": 37.84,
+        "end": 38.12
+      },
+      {
+        "word": " review",
+        "start": 38.58,
+        "end": 38.8
+      },
+      {
+        "word": " the",
+        "start": 38.8,
+        "end": 39.02
+      },
+      {
+        "word": " details,",
+        "start": 39.02,
+        "end": 39.44
+      }
+    ]
+  },
+  {
+    "start": 39.94,
+    "end": 40.88,
+    "text": " and create a request.",
+    "words": [
+      {
+        "word": " and",
+        "start": 39.94,
+        "end": 40.08
+      },
+      {
+        "word": " create",
+        "start": 40.08,
+        "end": 40.38
+      },
+      {
+        "word": " a",
+        "start": 40.38,
+        "end": 40.52
+      },
+      {
+        "word": " request.",
+        "start": 40.52,
+        "end": 40.88
+      }
+    ]
+  },
+  {
+    "start": 41.72,
+    "end": 44.66,
+    "text": " Suggested connections explain why an offer might fit.",
+    "words": [
+      {
+        "word": " Suggested",
+        "start": 41.72,
+        "end": 42.28
+      },
+      {
+        "word": " connections",
+        "start": 42.28,
+        "end": 42.62
+      },
+      {
+        "word": " explain",
+        "start": 42.62,
+        "end": 43.16
+      },
+      {
+        "word": " why",
+        "start": 43.16,
+        "end": 43.58
+      },
+      {
+        "word": " an",
+        "start": 43.58,
+        "end": 43.76
+      },
+      {
+        "word": " offer",
+        "start": 43.76,
+        "end": 44.08
+      },
+      {
+        "word": " might",
+        "start": 44.08,
+        "end": 44.38
+      },
+      {
+        "word": " fit.",
+        "start": 44.38,
+        "end": 44.66
+      }
+    ]
+  },
+  {
+    "start": 45.42,
+    "end": 47.58,
+    "text": " Both participants choose whether to connect",
+    "words": [
+      {
+        "word": " Both",
+        "start": 45.42,
+        "end": 45.68
+      },
+      {
+        "word": " participants",
+        "start": 45.68,
+        "end": 46.22
+      },
+      {
+        "word": " choose",
+        "start": 46.22,
+        "end": 46.7
+      },
+      {
+        "word": " whether",
+        "start": 46.7,
+        "end": 47.12
+      },
+      {
+        "word": " to",
+        "start": 47.12,
+        "end": 47.3
+      },
+      {
+        "word": " connect",
+        "start": 47.3,
+        "end": 47.58
+      }
+    ]
+  },
+  {
+    "start": 47.58,
+    "end": 49.72,
+    "text": " before private coordination opens.",
+    "words": [
+      {
+        "word": " before",
+        "start": 47.58,
+        "end": 48.04
+      },
+      {
+        "word": " private",
+        "start": 48.04,
+        "end": 48.62
+      },
+      {
+        "word": " coordination",
+        "start": 48.62,
+        "end": 49.16
+      },
+      {
+        "word": " opens.",
+        "start": 49.16,
+        "end": 49.72
+      }
+    ]
+  },
+  {
+    "start": 50.28,
+    "end": 52.44,
+    "text": " Then they can follow the request through",
+    "words": [
+      {
+        "word": " Then",
+        "start": 50.28,
+        "end": 50.92
+      },
+      {
+        "word": " they",
+        "start": 50.92,
+        "end": 51.1
+      },
+      {
+        "word": " can",
+        "start": 51.1,
+        "end": 51.22
+      },
+      {
+        "word": " follow",
+        "start": 51.22,
+        "end": 51.52
+      },
+      {
+        "word": " the",
+        "start": 51.52,
+        "end": 51.72
+      },
+      {
+        "word": " request",
+        "start": 51.72,
+        "end": 52.02
+      },
+      {
+        "word": " through",
+        "start": 52.02,
+        "end": 52.44
+      }
+    ]
+  },
+  {
+    "start": 52.44,
+    "end": 54.0,
+    "text": " and confirm the outcome.",
+    "words": [
+      {
+        "word": " and",
+        "start": 52.44,
+        "end": 52.96
+      },
+      {
+        "word": " confirm",
+        "start": 52.96,
+        "end": 53.36
+      },
+      {
+        "word": " the",
+        "start": 53.36,
+        "end": 53.62
+      },
+      {
+        "word": " outcome.",
+        "start": 53.62,
+        "end": 54.0
+      }
+    ]
+  },
+  {
+    "start": 54.76,
+    "end": 57.36,
+    "text": " The point is a clear path from asking to helping",
+    "words": [
+      {
+        "word": " The",
+        "start": 54.54,
+        "end": 54.9
+      },
+      {
+        "word": " point",
+        "start": 54.9,
+        "end": 55.16
+      },
+      {
+        "word": " is",
+        "start": 55.16,
+        "end": 55.42
+      },
+      {
+        "word": " a",
+        "start": 55.42,
+        "end": 55.52
+      },
+      {
+        "word": " clear",
+        "start": 55.52,
+        "end": 55.82
+      },
+      {
+        "word": " path",
+        "start": 55.82,
+        "end": 56.24
+      },
+      {
+        "word": " from",
+        "start": 56.24,
+        "end": 56.42
+      },
+      {
+        "word": " asking",
+        "start": 56.42,
+        "end": 56.84
+      },
+      {
+        "word": " to",
+        "start": 56.84,
+        "end": 57.04
+      },
+      {
+        "word": " helping",
+        "start": 57.04,
+        "end": 57.36
+      }
+    ]
+  },
+  {
+    "start": 57.36,
+    "end": 59.42,
+    "text": " with people making the decisions.",
+    "words": [
+      {
+        "word": " with",
+        "start": 57.36,
+        "end": 57.96
+      },
+      {
+        "word": " people",
+        "start": 57.96,
+        "end": 58.34
+      },
+      {
+        "word": " making",
+        "start": 58.34,
+        "end": 58.66
+      },
+      {
+        "word": " the",
+        "start": 58.66,
+        "end": 58.88
+      },
+      {
+        "word": " decisions.",
+        "start": 58.88,
+        "end": 59.42
+      }
+    ]
+  },
+  {
+    "start": 60.14,
+    "end": 63.46,
+    "text": " Group activities, volunteers, and local organizations",
+    "words": [
+      {
+        "word": " Group",
+        "start": 60.14,
+        "end": 60.36
+      },
+      {
+        "word": " activities,",
+        "start": 60.36,
+        "end": 60.92
+      },
+      {
+        "word": " volunteers,",
+        "start": 61.46,
+        "end": 61.94
+      },
+      {
+        "word": " and",
+        "start": 62.28,
+        "end": 62.48
+      },
+      {
+        "word": " local",
+        "start": 62.48,
+        "end": 62.74
+      },
+      {
+        "word": " organizations",
+        "start": 62.74,
+        "end": 63.46
+      }
+    ]
+  },
+  {
+    "start": 63.46,
+    "end": 65.22,
+    "text": " give that network more ways to grow.",
+    "words": [
+      {
+        "word": " give",
+        "start": 63.46,
+        "end": 63.82
+      },
+      {
+        "word": " that",
+        "start": 63.82,
+        "end": 64.04
+      },
+      {
+        "word": " network",
+        "start": 64.04,
+        "end": 64.34
+      },
+      {
+        "word": " more",
+        "start": 64.34,
+        "end": 64.62
+      },
+      {
+        "word": " ways",
+        "start": 64.62,
+        "end": 64.82
+      },
+      {
+        "word": " to",
+        "start": 64.82,
+        "end": 65.0
+      },
+      {
+        "word": " grow.",
+        "start": 65.0,
+        "end": 65.22
+      }
+    ]
+  },
+  {
+    "start": 66.12,
+    "end": 68.94,
+    "text": " Ordinary participation creates a foundation",
+    "words": [
+      {
+        "word": " Ordinary",
+        "start": 66.12,
+        "end": 66.54
+      },
+      {
+        "word": " participation",
+        "start": 66.54,
+        "end": 67.4
+      },
+      {
+        "word": " creates",
+        "start": 67.4,
+        "end": 68.2
+      },
+      {
+        "word": " a",
+        "start": 68.2,
+        "end": 68.42
+      },
+      {
+        "word": " foundation",
+        "start": 68.42,
+        "end": 68.94
+      }
+    ]
+  },
+  {
+    "start": 68.94,
+    "end": 71.34,
+    "text": " that is already there when circumstances change.",
+    "words": [
+      {
+        "word": " that",
+        "start": 68.94,
+        "end": 69.16
+      },
+      {
+        "word": " is",
+        "start": 69.16,
+        "end": 69.28
+      },
+      {
+        "word": " already",
+        "start": 69.28,
+        "end": 69.68
+      },
+      {
+        "word": " there",
+        "start": 69.68,
+        "end": 70.04
+      },
+      {
+        "word": " when",
+        "start": 70.04,
+        "end": 70.22
+      },
+      {
+        "word": " circumstances",
+        "start": 70.22,
+        "end": 70.74
+      },
+      {
+        "word": " change.",
+        "start": 70.74,
+        "end": 71.34
+      }
+    ]
+  },
+  {
+    "start": 72.1,
+    "end": 75.02,
+    "text": " When disaster strikes, the same familiar platform",
+    "words": [
+      {
+        "word": " When",
+        "start": 72.1,
+        "end": 72.38
+      },
+      {
+        "word": " disaster",
+        "start": 72.38,
+        "end": 72.66
+      },
+      {
+        "word": " strikes,",
+        "start": 72.66,
+        "end": 73.22
+      },
+      {
+        "word": " the",
+        "start": 73.76,
+        "end": 73.86
+      },
+      {
+        "word": " same",
+        "start": 73.86,
+        "end": 74.08
+      },
+      {
+        "word": " familiar",
+        "start": 74.08,
+        "end": 74.54
+      },
+      {
+        "word": " platform",
+        "start": 74.54,
+        "end": 75.02
+      }
+    ]
+  },
+  {
+    "start": 75.02,
+    "end": 77.18,
+    "text": " opens a dedicated response workspace.",
+    "words": [
+      {
+        "word": " opens",
+        "start": 75.02,
+        "end": 75.42
+      },
+      {
+        "word": " a",
+        "start": 75.42,
+        "end": 75.6
+      },
+      {
+        "word": " dedicated",
+        "start": 75.6,
+        "end": 75.96
+      },
+      {
+        "word": " response",
+        "start": 75.96,
+        "end": 76.48
+      },
+      {
+        "word": " workspace.",
+        "start": 76.48,
+        "end": 77.18
+      }
+    ]
+  },
+  {
+    "start": 77.94,
+    "end": 81.36,
+    "text": " Bring urgent requests, interview, organize the needs",
+    "words": [
+      {
+        "word": " Bring",
+        "start": 77.94,
+        "end": 78.42
+      },
+      {
+        "word": " urgent",
+        "start": 78.42,
+        "end": 78.78
+      },
+      {
+        "word": " requests,",
+        "start": 78.78,
+        "end": 79.18
+      },
+      {
+        "word": " interview,",
+        "start": 79.52,
+        "end": 79.8
+      },
+      {
+        "word": " organize",
+        "start": 80.48,
+        "end": 80.82
+      },
+      {
+        "word": " the",
+        "start": 80.82,
+        "end": 81.08
+      },
+      {
+        "word": " needs",
+        "start": 81.08,
+        "end": 81.36
+      }
+    ]
+  },
+  {
+    "start": 81.36,
+    "end": 84.16,
+    "text": " and help coordinators focus their follow-up.",
+    "words": [
+      {
+        "word": " and",
+        "start": 81.36,
+        "end": 81.64
+      },
+      {
+        "word": " help",
+        "start": 81.64,
+        "end": 82.14
+      },
+      {
+        "word": " coordinators",
+        "start": 82.14,
+        "end": 82.84
+      },
+      {
+        "word": " focus",
+        "start": 82.84,
+        "end": 83.26
+      },
+      {
+        "word": " their",
+        "start": 83.26,
+        "end": 83.54
+      },
+      {
+        "word": " follow",
+        "start": 83.54,
+        "end": 83.9
+      },
+      {
+        "word": "-up.",
+        "start": 83.9,
+        "end": 84.16
+      }
+    ]
+  },
+  {
+    "start": 84.9,
+    "end": 88.0,
+    "text": " Missing person notices and voluntary safe check-ins",
+    "words": [
+      {
+        "word": " Missing",
+        "start": 84.9,
+        "end": 85.44
+      },
+      {
+        "word": " person",
+        "start": 85.44,
+        "end": 85.78
+      },
+      {
+        "word": " notices",
+        "start": 85.78,
+        "end": 86.22
+      },
+      {
+        "word": " and",
+        "start": 86.22,
+        "end": 86.58
+      },
+      {
+        "word": " voluntary",
+        "start": 86.58,
+        "end": 87.04
+      },
+      {
+        "word": " safe",
+        "start": 87.04,
+        "end": 87.48
+      },
+      {
+        "word": " check",
+        "start": 87.48,
+        "end": 87.74
+      },
+      {
+        "word": "-ins",
+        "start": 87.74,
+        "end": 88.0
+      }
+    ]
+  },
+  {
+    "start": 88.0,
+    "end": 90.4,
+    "text": " give the community a place to share updates.",
+    "words": [
+      {
+        "word": " give",
+        "start": 88.0,
+        "end": 88.3
+      },
+      {
+        "word": " the",
+        "start": 88.3,
+        "end": 88.5
+      },
+      {
+        "word": " community",
+        "start": 88.5,
+        "end": 88.9
+      },
+      {
+        "word": " a",
+        "start": 88.9,
+        "end": 89.14
+      },
+      {
+        "word": " place",
+        "start": 89.14,
+        "end": 89.42
+      },
+      {
+        "word": " to",
+        "start": 89.42,
+        "end": 89.64
+      },
+      {
+        "word": " share",
+        "start": 89.64,
+        "end": 89.9
+      },
+      {
+        "word": " updates.",
+        "start": 89.9,
+        "end": 90.4
+      }
+    ]
+  },
+  {
+    "start": 91.48,
+    "end": 93.6,
+    "text": " Adults' names appear only with permission.",
+    "words": [
+      {
+        "word": " Adults'",
+        "start": 91.48,
+        "end": 91.8
+      },
+      {
+        "word": " names",
+        "start": 92.02,
+        "end": 92.18
+      },
+      {
+        "word": " appear",
+        "start": 92.18,
+        "end": 92.5
+      },
+      {
+        "word": " only",
+        "start": 92.5,
+        "end": 92.94
+      },
+      {
+        "word": " with",
+        "start": 92.94,
+        "end": 93.18
+      },
+      {
+        "word": " permission.",
+        "start": 93.18,
+        "end": 93.6
+      }
+    ]
+  },
+  {
+    "start": 94.5,
+    "end": 96.22,
+    "text": " Children's details stay private.",
+    "words": [
+      {
+        "word": " Children's",
+        "start": 94.5,
+        "end": 95.0
+      },
+      {
+        "word": " details",
+        "start": 95.0,
+        "end": 95.36
+      },
+      {
+        "word": " stay",
+        "start": 95.36,
+        "end": 95.74
+      },
+      {
+        "word": " private.",
+        "start": 95.74,
+        "end": 96.22
+      }
+    ]
+  },
+  {
+    "start": 96.96,
+    "end": 99.02,
+    "text": " Community tips are shared privately",
+    "words": [
+      {
+        "word": " Community",
+        "start": 96.96,
+        "end": 97.28
+      },
+      {
+        "word": " tips",
+        "start": 97.28,
+        "end": 97.8
+      },
+      {
+        "word": " are",
+        "start": 97.8,
+        "end": 98.1
+      },
+      {
+        "word": " shared",
+        "start": 98.1,
+        "end": 98.46
+      },
+      {
+        "word": " privately",
+        "start": 98.46,
+        "end": 99.02
+      }
+    ]
+  },
+  {
+    "start": 99.02,
+    "end": 100.9,
+    "text": " with the reporter and coordinators.",
+    "words": [
+      {
+        "word": " with",
+        "start": 99.02,
+        "end": 99.34
+      },
+      {
+        "word": " the",
+        "start": 99.34,
+        "end": 99.42
+      },
+      {
+        "word": " reporter",
+        "start": 99.42,
+        "end": 99.8
+      },
+      {
+        "word": " and",
+        "start": 99.8,
+        "end": 100.16
+      },
+      {
+        "word": " coordinators.",
+        "start": 100.16,
+        "end": 100.9
+      }
+    ]
+  },
+  {
+    "start": 101.68,
+    "end": 105.02,
+    "text": " A check-in is self-reported, not a guarantee of safety.",
+    "words": [
+      {
+        "word": " A",
+        "start": 101.68,
+        "end": 101.84
+      },
+      {
+        "word": " check",
+        "start": 101.84,
+        "end": 102.08
+      },
+      {
+        "word": "-in",
+        "start": 102.08,
+        "end": 102.28
+      },
+      {
+        "word": " is",
+        "start": 102.28,
+        "end": 102.46
+      },
+      {
+        "word": " self",
+        "start": 102.46,
+        "end": 102.74
+      },
+      {
+        "word": "-reported,",
+        "start": 102.74,
+        "end": 103.3
+      },
+      {
+        "word": " not",
+        "start": 103.5,
+        "end": 103.88
+      },
+      {
+        "word": " a",
+        "start": 103.88,
+        "end": 104.0
+      },
+      {
+        "word": " guarantee",
+        "start": 104.0,
+        "end": 104.4
+      },
+      {
+        "word": " of",
+        "start": 104.4,
+        "end": 104.6
+      },
+      {
+        "word": " safety.",
+        "start": 104.6,
+        "end": 105.02
+      }
+    ]
+  },
+  {
+    "start": 105.86,
+    "end": 107.62,
+    "text": " Brow shelter and transport listings.",
+    "words": [
+      {
+        "word": " Brow",
+        "start": 105.86,
+        "end": 106.04
+      },
+      {
+        "word": " shelter",
+        "start": 106.04,
+        "end": 106.46
+      },
+      {
+        "word": " and",
+        "start": 106.46,
+        "end": 106.74
+      },
+      {
+        "word": " transport",
+        "start": 106.74,
+        "end": 107.16
+      },
+      {
+        "word": " listings.",
+        "start": 107.16,
+        "end": 107.62
+      }
+    ]
+  },
+  {
+    "start": 108.22,
+    "end": 110.48,
+    "text": " See available resources and supplies.",
+    "words": [
+      {
+        "word": " See",
+        "start": 108.22,
+        "end": 108.66
+      },
+      {
+        "word": " available",
+        "start": 108.66,
+        "end": 109.1
+      },
+      {
+        "word": " resources",
+        "start": 109.1,
+        "end": 109.62
+      },
+      {
+        "word": " and",
+        "start": 109.62,
+        "end": 110.06
+      },
+      {
+        "word": " supplies.",
+        "start": 110.06,
+        "end": 110.48
+      }
+    ]
+  },
+  {
+    "start": 111.16000000000001,
+    "end": 113.64,
+    "text": " And use a geographic map for local context.",
+    "words": [
+      {
+        "word": " And",
+        "start": 110.84,
+        "end": 111.28
+      },
+      {
+        "word": " use",
+        "start": 111.28,
+        "end": 111.52
+      },
+      {
+        "word": " a",
+        "start": 111.52,
+        "end": 111.7
+      },
+      {
+        "word": " geographic",
+        "start": 111.7,
+        "end": 112.14
+      },
+      {
+        "word": " map",
+        "start": 112.14,
+        "end": 112.52
+      },
+      {
+        "word": " for",
+        "start": 112.52,
+        "end": 112.78
+      },
+      {
+        "word": " local",
+        "start": 112.78,
+        "end": 113.0
+      },
+      {
+        "word": " context.",
+        "start": 113.0,
+        "end": 113.64
+      }
+    ]
+  },
+  {
+    "start": 114.18,
+    "end": 117.86,
+    "text": " These are tools for coordination, not live dispatch",
+    "words": [
+      {
+        "word": " These",
+        "start": 114.18,
+        "end": 114.78
+      },
+      {
+        "word": " are",
+        "start": 114.78,
+        "end": 115.0
+      },
+      {
+        "word": " tools",
+        "start": 115.0,
+        "end": 115.34
+      },
+      {
+        "word": " for",
+        "start": 115.34,
+        "end": 115.6
+      },
+      {
+        "word": " coordination,",
+        "start": 115.6,
+        "end": 116.08
+      },
+      {
+        "word": " not",
+        "start": 116.72,
+        "end": 117.02
+      },
+      {
+        "word": " live",
+        "start": 117.02,
+        "end": 117.46
+      },
+      {
+        "word": " dispatch",
+        "start": 117.46,
+        "end": 117.86
+      }
+    ]
+  },
+  {
+    "start": 118.4,
+    "end": 120.08,
+    "text": " or a promise that help is available.",
+    "words": [
+      {
+        "word": " or",
+        "start": 118.08,
+        "end": 118.52
+      },
+      {
+        "word": " a",
+        "start": 118.52,
+        "end": 118.66
+      },
+      {
+        "word": " promise",
+        "start": 118.66,
+        "end": 118.94
+      },
+      {
+        "word": " that",
+        "start": 118.94,
+        "end": 119.18
+      },
+      {
+        "word": " help",
+        "start": 119.18,
+        "end": 119.4
+      },
+      {
+        "word": " is",
+        "start": 119.4,
+        "end": 119.66
+      },
+      {
+        "word": " available.",
+        "start": 119.66,
+        "end": 120.08
+      }
+    ]
+  },
+  {
+    "start": 120.96,
+    "end": 124.54,
+    "text": " Coordinators can see unresolved requests, follow-up",
+    "words": [
+      {
+        "word": " Coordinators",
+        "start": 120.96,
+        "end": 121.58
+      },
+      {
+        "word": " can",
+        "start": 121.58,
+        "end": 121.96
+      },
+      {
+        "word": " see",
+        "start": 121.96,
+        "end": 122.2
+      },
+      {
+        "word": " unresolved",
+        "start": 122.2,
+        "end": 122.88
+      },
+      {
+        "word": " requests,",
+        "start": 122.88,
+        "end": 123.44
+      },
+      {
+        "word": " follow",
+        "start": 123.96,
+        "end": 124.26
+      },
+      {
+        "word": "-up",
+        "start": 124.26,
+        "end": 124.54
+      }
+    ]
+  },
+  {
+    "start": 124.54,
+    "end": 125.72,
+    "text": " and track progress.",
+    "words": [
+      {
+        "word": " and",
+        "start": 124.54,
+        "end": 125.0
+      },
+      {
+        "word": " track",
+        "start": 125.0,
+        "end": 125.24
+      },
+      {
+        "word": " progress.",
+        "start": 125.24,
+        "end": 125.72
+      }
+    ]
+  },
+  {
+    "start": 126.7,
+    "end": 129.48,
+    "text": " Requestor confirmation helps distinguish a connection",
+    "words": [
+      {
+        "word": " Requestor",
+        "start": 126.7,
+        "end": 127.22
+      },
+      {
+        "word": " confirmation",
+        "start": 127.22,
+        "end": 127.7
+      },
+      {
+        "word": " helps",
+        "start": 127.7,
+        "end": 128.22
+      },
+      {
+        "word": " distinguish",
+        "start": 128.22,
+        "end": 128.78
+      },
+      {
+        "word": " a",
+        "start": 128.78,
+        "end": 129.12
+      },
+      {
+        "word": " connection",
+        "start": 129.12,
+        "end": 129.48
+      }
+    ]
+  },
+  {
+    "start": 129.48,
+    "end": 131.34,
+    "text": " from support that actually arrived.",
+    "words": [
+      {
+        "word": " from",
+        "start": 129.48,
+        "end": 129.76
+      },
+      {
+        "word": " support",
+        "start": 129.76,
+        "end": 130.14
+      },
+      {
+        "word": " that",
+        "start": 130.14,
+        "end": 130.34
+      },
+      {
+        "word": " actually",
+        "start": 130.34,
+        "end": 130.82
+      },
+      {
+        "word": " arrived.",
+        "start": 130.82,
+        "end": 131.34
+      }
+    ]
+  },
+  {
+    "start": 132.28,
+    "end": 135.56,
+    "text": " Community help network connects ordinary kindness",
+    "words": [
+      {
+        "word": " Community",
+        "start": 132.28,
+        "end": 132.82
+      },
+      {
+        "word": " help",
+        "start": 132.82,
+        "end": 133.18
+      },
+      {
+        "word": " network",
+        "start": 133.18,
+        "end": 133.58
+      },
+      {
+        "word": " connects",
+        "start": 133.58,
+        "end": 134.42
+      },
+      {
+        "word": " ordinary",
+        "start": 134.42,
+        "end": 135.04
+      },
+      {
+        "word": " kindness",
+        "start": 135.04,
+        "end": 135.56
+      }
+    ]
+  },
+  {
+    "start": 136.12,
+    "end": 137.74,
+    "text": " with practical disaster readiness.",
+    "words": [
+      {
+        "word": " with",
+        "start": 135.76,
+        "end": 136.2
+      },
+      {
+        "word": " practical",
+        "start": 136.2,
+        "end": 136.72
+      },
+      {
+        "word": " disaster",
+        "start": 136.72,
+        "end": 137.12
+      },
+      {
+        "word": " readiness.",
+        "start": 137.12,
+        "end": 137.74
+      }
+    ]
+  },
+  {
+    "start": 138.74,
+    "end": 141.12,
+    "text": " Build the relationships before the crisis.",
+    "words": [
+      {
+        "word": " Build",
+        "start": 138.51999999999998,
+        "end": 138.98
+      },
+      {
+        "word": " the",
+        "start": 138.98,
+        "end": 139.22
+      },
+      {
+        "word": " relationships",
+        "start": 139.22,
+        "end": 139.78
+      },
+      {
+        "word": " before",
+        "start": 139.78,
+        "end": 140.54
+      },
+      {
+        "word": " the",
+        "start": 140.54,
+        "end": 140.76
+      },
+      {
+        "word": " crisis.",
+        "start": 140.76,
+        "end": 141.12
+      }
+    ]
+  },
+  {
+    "start": 141.92,
+    "end": 145.1,
+    "text": " Keep the community connected when it matters most.",
+    "words": [
+      {
+        "word": " Keep",
+        "start": 141.92,
+        "end": 142.62
+      },
+      {
+        "word": " the",
+        "start": 142.62,
+        "end": 142.82
+      },
+      {
+        "word": " community",
+        "start": 142.82,
+        "end": 143.2
+      },
+      {
+        "word": " connected",
+        "start": 143.2,
+        "end": 143.74
+      },
+      {
+        "word": " when",
+        "start": 143.74,
+        "end": 144.4
+      },
+      {
+        "word": " it",
+        "start": 144.4,
+        "end": 144.5
+      },
+      {
+        "word": " matters",
+        "start": 144.5,
+        "end": 144.74
+      },
+      {
+        "word": " most.",
+        "start": 144.74,
+        "end": 145.1
+      }
+    ]
+  }
+]

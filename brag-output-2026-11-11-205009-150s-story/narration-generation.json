@@ -1,0 +1,14 @@
+{
+  "engine": "Qwen3-TTS VoiceDesign via mlx-audio",
+  "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-4bit",
+  "seed": 20261113,
+  "seconds": 146.0,
+  "sample_rate": 24000,
+  "fresh_generation": true,
+  "new_script_word_count": 324,
+  "voice_description": "Generic male baritone, alternate Qwen VoiceDesign engine",
+  "speed_adjustment": null,
+  "normalization": "-16 LUFS, -1.5 dBTP",
+  "verified_speech_end": 145.1,
+  "target_film_seconds": 150
+}

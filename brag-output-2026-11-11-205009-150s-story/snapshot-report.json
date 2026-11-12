@@ -1,0 +1,84 @@
+{
+  "ok": true,
+  "outputDir": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots",
+  "frames": [
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-00-at-2s.png",
+      "time": 2
+    },
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-01-at-15s.png",
+      "time": 15
+    },
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-02-at-24s.png",
+      "time": 24
+    },
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-03-at-33s.png",
+      "time": 33
+    },
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-04-at-39s.png",
+      "time": 39
+    },
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-05-at-43s.png",
+      "time": 43
+    },
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-06-at-51s.png",
+      "time": 51
+    },
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-07-at-63s.png",
+      "time": 63
+    },
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-08-at-68s.png",
+      "time": 68
+    },
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-09-at-78s.png",
+      "time": 78
+    },
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-10-at-91s.png",
+      "time": 91
+    },
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-11-at-103s.png",
+      "time": 103
+    },
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-12-at-109s.png",
+      "time": 109
+    },
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-13-at-116s.png",
+      "time": 116
+    },
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-14-at-126s.png",
+      "time": 126
+    },
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-15-at-142s.png",
+      "time": 142
+    },
+    {
+      "path": "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/frame-16-at-149.75s.png",
+      "time": 149.75
+    }
+  ],
+  "contactSheets": [
+    "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/contact-sheet-1.jpg",
+    "/Users/sidharthrai/Documents/ChatGPT/Disaster Relief/brag-output-2026-11-11-205009-150s-story/snapshots/contact-sheet-2.jpg"
+  ],
+  "_meta": {
+    "version": "0.9.36",
+    "latestVersion": "0.9.36",
+    "updateAvailable": false,
+    "checkedAt": "2026-11-12T02:37:43.527Z"
+  }
+}

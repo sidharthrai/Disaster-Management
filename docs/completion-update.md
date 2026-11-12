@@ -35,3 +35,7 @@ The earlier integration run passed 123 tests across 30 files, TypeScript checkin
 ## Latest demo build
 
 The inline urgent flow was verified in the rebuilt production demo: submission stayed on /disaster, displayed the response-board confirmation, and promoted the new Urgent request with a New badge. The latest full suite passed 169 tests across 46 files, TypeScript checking and the isolated optimized build. The app source is on the GitHub main branch. The revised main video targets 150 seconds and is being validated separately.
+
+## Final main video
+
+The final main pitch is exactly 150 seconds at 1920×1080 with H264 video and AAC audio. Exported narration was transcribed and passed all 26 story checks. It contains a new 324-word narration, eleven actual platform screens, and the inline urgent intake. The poster is baked into frame zero. The superseded short drafts remain local and are not the main deliverable.

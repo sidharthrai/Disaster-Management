@@ -1,0 +1,167 @@
+[
+  [
+    "disruption",
+    0,
+    10,
+    "When disaster disrupts a community.",
+    "Finding the right help becomes another problem.",
+    "disaster.png",
+    "Disaster response workspace",
+    true,
+    "top"
+  ],
+  [
+    "connections",
+    10,
+    9,
+    "People want to help.",
+    "Bring requests and offers into a shared place.",
+    "dashboard.png",
+    "Requests & offers",
+    false,
+    "center"
+  ],
+  [
+    "foundation",
+    19,
+    8.5,
+    "Build the network before crisis.",
+    "Everyday connections create a foundation.",
+    "dashboard.png",
+    "Community first",
+    false,
+    "top"
+  ],
+  [
+    "everyday",
+    27.5,
+    9.5,
+    "A grocery run. A ride.",
+    "Small acts make a difficult day easier.",
+    "intake.png",
+    "Everyday help",
+    false,
+    "top"
+  ],
+  [
+    "review",
+    37,
+    4.5,
+    "Describe. Review. Request.",
+    "People review the details before a request is created.",
+    "intake.png",
+    "Human decisions",
+    false,
+    "center"
+  ],
+  [
+    "matches",
+    41.5,
+    4,
+    "Understand a possible connection.",
+    "Suggestions explain why an offer might fit.",
+    "matching.png",
+    "Explainable suggestions",
+    false,
+    "bottom"
+  ],
+  [
+    "agreement",
+    45.5,
+    14.5,
+    "Both people choose to connect.",
+    "Coordinate privately. Confirm the outcome.",
+    "matching.png",
+    "Mutual agreement",
+    false,
+    "bottom"
+  ],
+  [
+    "activities",
+    60,
+    6,
+    "Keep the network growing.",
+    "Ordinary participation builds community.",
+    "groups.png",
+    "Group activities",
+    false,
+    "center"
+  ],
+  [
+    "participation",
+    66,
+    6,
+    "More ways to show up.",
+    "Volunteers and local organizations strengthen the network.",
+    "organizations.png",
+    "Community participation",
+    false,
+    "center"
+  ],
+  [
+    "response",
+    72,
+    13,
+    "The same community. Ready together.",
+    "A dedicated workspace for urgent needs and follow-up.",
+    "urgent-inline.png",
+    "Disaster response",
+    true,
+    "bottom"
+  ],
+  [
+    "notices",
+    85,
+    16.5,
+    "Share updates with care.",
+    "Missing-person notices. Private community tips.",
+    "people.png",
+    "People & community",
+    true,
+    "top"
+  ],
+  [
+    "checkins",
+    101.5,
+    4.5,
+    "Let your community know.",
+    "Voluntary safe check-ins are self-reported.",
+    "people.png",
+    "Consent & privacy",
+    true,
+    "top"
+  ],
+  [
+    "essentials",
+    106,
+    5,
+    "Find practical support.",
+    "Shelter. Transport. Resources and supplies.",
+    "disaster-resources.png",
+    "Essential support",
+    true,
+    "bottom"
+  ],
+  [
+    "geography",
+    111,
+    10,
+    "See the local context.",
+    "A geographic map with illustrative community markers.",
+    "map.png",
+    "OpenStreetMap geography",
+    true,
+    "center"
+  ],
+  [
+    "followup",
+    121,
+    11.3,
+    "Follow help through.",
+    "Unresolved requests. Follow-up. Requester confirmation.",
+    "coordinator.png",
+    "Coordination & outcomes",
+    true,
+    "center"
+  ]
+]

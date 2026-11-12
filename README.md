@@ -48,3 +48,9 @@ See [feature status](docs/feature-status.md) for implemented behavior and verifi
 Run `npm run demo:build`, then `npm run demo:start`. The optimized local demo starts at http://127.0.0.1:3005. Demo mode needs no password; choose a fictional member, coordinator or organization from the identity selector. Account mode uses registration and has no preset shared password.
 
 Urgent help opens inside Disaster Management. After reviewed submission, the page shows a receipt and highlights the new request on the response board.
+
+## Demo video
+
+[Watch or download the final 2:30 product demo](brag-output-2026-11-11-205009-150s-story/brag.mp4). It includes the full community-before-crisis story, eleven actual app screens, narrated audio and music. [Poster](brag-output-2026-11-11-205009-150s-story/brag.jpg) and [media verification](brag-output-2026-11-11-205009-150s-story/delivery-verification.json) are included.
+
+The app source and video are published to the GitHub main branch. A hosted Sites deployment is not available for the current native Node/SQLite backend; it requires a separate Workers/D1 port.

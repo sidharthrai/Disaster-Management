@@ -1,0 +1,13 @@
+# Community Help Network launch film
+
+LOOK: daylight paper #f8f9f5; ink #213d32; community green #287052; sage #e8f0e5; operational rust #9c4932; sun #eacf79. Geist 400/500/600/700 from the app’s local WOFF2 files. Hook and close 112px; operational headline 72px; everyday headline 64px; body labels 23–31px. Primary text respects a 120px horizontal safe margin. Cards and source stages have 20–24px corners and 2px borders.
+
+The neighborhood illustration, fonts, and every product screenshot come from the actual local app. Screenshots use contain fit and retain their original colors and proportions. Browser chrome is adapted from the installed Hyperframes registry browser-device-stage component; its skeleton and slow drift are removed. Fictional grocery content is a clearly labeled illustrative detail card, not a fabricated source screenshot. No external asset fetches are needed at render time.
+
+Four editable scene files: everyday 0–4.4s; connection 4.4–11.25s; response 11.25–19.3s; together 19.3–25s. The narration timing owns the revised seam positions. Hook lands before 0.8s. The consent flow enters at one-second intervals, then holds. Operational labels enter by 12s and hold until the next scene. The finale introduces the product name at 19.4s and the closing line at 21.4s, settling by 22.05s for the final hold.
+
+Transitions have a visible cause: a sage help chip expands into the everyday stage, a rust readiness tab becomes the response canvas, and the response canvas clears upward into the green close. All timelines are synchronous paused GSAP timelines with explicit fromTo states. There are no looping or idle pulsing elements. A build-time peak in the extracted music band 2 only adjusts the neighborhood illustration’s initial scale by less than 0.8%; it does not pulse text or move a settled title.
+
+Audio: local Qwen VoiceDesign narration at 0.2s with 23.68s source duration and unity gain; local Sascha Ende music at 0.13 gain with 0.8s opening and 1.5s closing fades; a quiet click at 8.2s accompanies the consent interaction; a soft reveal cue at 11.46s accompanies the operational scene. Music credit: “Happy Beats Business Moves Vol. 12” by Sascha Ende, ende.app, CC BY 4.0. Final license ledger is owned by the parent task.
+
+BANNED: generic dashboard inventions, screenshot recoloring, fake scale metrics, crisis spectacle, emoji icons, floating loops, emergency alarms, live dispatch claims, or public missing-person search claims. Both product scenes and the final mosaic visibly identify the synthetic local demo. The response scene states “Demonstration · no live alerts or dispatch.”

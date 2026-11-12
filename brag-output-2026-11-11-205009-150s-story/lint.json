@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "errorCount": 0,
+  "warningCount": 0,
+  "infoCount": 0,
+  "findings": [],
+  "filesScanned": 17,
+  "unmountedCompositions": [
+    "compositions/connect.html",
+    "compositions/connection.html",
+    "compositions/coordinate.html",
+    "compositions/daily.html",
+    "compositions/groups.html",
+    "compositions/map.html",
+    "compositions/people.html",
+    "compositions/problem.html",
+    "compositions/support.html"
+  ],
+  "_meta": {
+    "version": "0.9.36",
+    "latestVersion": "0.9.36",
+    "updateAvailable": false,
+    "checkedAt": "2026-11-12T02:37:43.527Z"
+  }
+}
